@@ -12,6 +12,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { Card } from 'react-native-shadow-cards';
+import { FloatingAction } from "react-native-floating-action";
 // import all basic components
  
 ;
@@ -26,10 +27,12 @@ import Screen1 from '../components/ComplaintsScreen.js';
 
  
 //Import Custom Sidebar
-import CustomSidebarMenu from '../components/CustomSideBarMenu.js';
+import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
+import { Icon } from 'react-native-elements';
  
 global.currentScreenIndex = 0;
 //Navigation Drawer Structure for all screen
+
 class MenuIcon extends Component {
  
     toggleDrawer = () => {
@@ -60,8 +63,17 @@ class MenuIcon extends Component {
    
     }
   }
-
+  const actions = [
+    {
+      text: "Create a Complain",
+      icon: require("../assets/icons/pencil-48.png"),
+      name: "bt_createComplain",
+      position: 1
+    },
+   
+  ];
 class HomeScreen extends Component {
+  
   //Top Navigation Header with Donute Button
   toggleDrawer = () => {
     //Props to open/close the drawer
@@ -69,35 +81,53 @@ class HomeScreen extends Component {
   };
   render() {
     return (
-      <View style={styles.mainnContainer} >
+      <View style={styles.mainnContainer}>
          <StatusBar
         backgroundColor="green"
                 barStyle="light-content"></StatusBar>
-            <Card style = {styles.cardStyle}>
-                <View>
-                    <Text> Total Complaints</Text>
+            <Card style = {styles.bigCards} >
+                <View style= {{ alignItems:'center', justifyContent:'center', flex:1, flexDirection:'column', backgroundColor:'#00B5B8'}}>
+                <Text style={{fontSize:56 , color:'white', fontWeight:'bold'  }}>0</Text>
+            <Text style={{ fontSize: 24, color: 'white', fontStyle: 'normal', fontWeight: 'bold' }}> TOTAL Complaints </Text>
+                  
+                </View>
+        </Card>
+        <Card style = {styles.bigCards} >
+                <View style= {{ alignItems:'center', justifyContent:'center', flex:1, flexDirection:'column', backgroundColor:'#3CB371'}}>
+                <Text style={{fontSize:56 , color:'white', fontWeight:'bold'  }}>0</Text>       
+            <Text style={{ fontSize: 24, color: 'white', fontStyle: 'normal', fontWeight: 'bold' }}> Resolved Complaints </Text>
+                   
                 </View>
             </Card>
-            <Card style = {styles.cardStyle}>
-                <View>
-                    <Text> Total Complaints</Text>
+          <View style={{flex:1 , flexDirection:'row' , alignItems:'center' , justifyContent:'center'}}>
+             <Card style = {styles.cardStyle}>
+                <View style= {{backgroundColor:'#F4A460' , flex:1 , justifyContent:'center' , alignItems:'center',flexDirection:'column'}}>
+                <Text style={{color:'white' , fontSize:28 , fontWeight:'bold' }}>0</Text>   
+              <Text style={{ color: 'white', fontSize: 16, fontFamily: 'sans-serif' }}>Pending Complaints</Text>
+                      
                 </View>
             </Card>
-            <Card style = {styles.cardStyle}>
-                <View>
-                    <Text> Total Complaints</Text>
+          <Card style={{ marginTop: 15, flex: 1, marginLeft: 10, marginRight:10}}>
+            <View style= {{backgroundColor:'#F08080' , flex:1 , justifyContent:'center' , alignItems:'center',flexDirection:'column'}}>
+              <Text style={{ color: 'white', fontSize: 28, fontWeight: 'bold' }}>0</Text>
+              <Text style={{color:'white' , fontSize:16 , fontFamily:'sans-serif'}}>In-Progress Complaints</Text>
+              
                 </View>
             </Card>
-            <Card style = {styles.cardStyle}>
-                <View>
-                    <Text> Total Complaints</Text>
+
+          </View>
+            
+        <View style={{ flex: 1 }}>
+          
+     
                 </View>
-            </Card>
-            <Card style = {styles.cardStyle}>
-                <View>
-                    <Text> Total Complaints</Text>
+                <View style={{flex:1}}></View>
+        <View style={{ flex: 1 ,right:10}}>
+        <FloatingAction
+                  actions={actions}
+                 onPressItem={name => {console.log("selected button:")}} />
                 </View>
-            </Card>
+                    
 
       </View>
     );
@@ -112,6 +142,7 @@ const FirstActivity_StackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Dashboard',
       headerLeft: <MenuIcon navigationProps={navigation} />,
+      
       headerStyle: {
         backgroundColor: 'green',
       },
@@ -145,6 +176,7 @@ const Screen3_StackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Demo Screen 3',
       headerLeft: <MenuIcon navigationProps={navigation} />,
+      
       headerStyle: {
         backgroundColor: 'green',
       },
@@ -187,19 +219,23 @@ const DrawerNavigatorExample = createDrawerNavigator(
 export default createAppContainer(DrawerNavigatorExample);
 const styles = StyleSheet.create({
 
-    cardStyle: {
-      marginTop:20,
-        width: '90%',
-        height:70,
-    },
-    mainnContainer:{
+  cardStyle: {
+    marginTop: 15,
+    flex: 1,
+    
+    marginLeft: 10,
+    
         
-        alignItems: 'center',
-        flex: 1,
-        flexDirection:'column'
-    },
-    textStyle: {
-        
-    }
-
-})
+  },
+  bigCards: {
+    marginTop: 15,
+    flex: 1.5,
+    borderRadius: 4,
+  },
+  mainnContainer: {
+        alignItems:'center',
+     flex:1,
+    flexDirection: 'column'
+  },
+   
+});
