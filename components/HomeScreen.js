@@ -12,20 +12,23 @@ import {
   StatusBar,
 } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
+
+import ActionButton from 'react-native-action-button';
+
 // import all basic components
 
 //For React Navigation 4+
+import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 
 //Import all the screens
 import Screen1 from '../components/ComplaintsScreen.js';
+import launchComplainIcon from '../assets/icons/pencil-48.png'
 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
 import {Icon} from 'react-native-vector-icons';
-import {createAppContainer} from 'react-navigation';
-import {ActionButton} from 'react-native-action-button';
 
 global.currentScreenIndex = 0;
 //Navigation Drawer Structure for all screen
@@ -51,14 +54,22 @@ class MenuIcon extends Component {
     );
   }
 }
-const actions = [
-  {
-    text: 'Create a Complain',
-    icon: require('../assets/icons/pencil-48.png'),
-    name: 'bt_createComplain',
-    position: 1,
-  },
-];
+class LaunchComplainIcon extends Component {
+ 
+  render() {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity >
+          <Image
+            source={launchComplainIcon}
+            style={{width: 20, height: 20, marginLeft: 10, tintColor: 'white'}}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
+
 class HomeScreen extends Component {
   //Top Navigation Header with Donute Button
   toggleDrawer = () => {
@@ -199,6 +210,8 @@ const FirstActivity_StackNavigator = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Dashboard',
       headerLeft: <MenuIcon navigationProps={navigation} />,
+      headerRight: <LaunchComplainIcon/>,
+
 
       headerStyle: {
         backgroundColor: 'green',
@@ -216,6 +229,7 @@ const Screen2_StackNavigator = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 2',
       headerLeft: <MenuIcon navigationProps={navigation} />,
+      headerRight: <LaunchComplainIcon/>,
 
       headerStyle: {
         backgroundColor: 'green',
@@ -233,6 +247,8 @@ const Screen3_StackNavigator = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 3',
       headerLeft: <MenuIcon navigationProps={navigation} />,
+      headerRight: <LaunchComplainIcon/>,
+
 
       headerStyle: {
         backgroundColor: 'green',
@@ -278,7 +294,6 @@ const styles = StyleSheet.create({
   cardStyle: {
     marginTop: 15,
     flex: 1,
-
     marginLeft: 10,
   },
   bigCards: {
