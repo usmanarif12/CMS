@@ -1,5 +1,5 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 //import react in our code.
 import {
   View,
@@ -8,72 +8,58 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-    Text,
+  Text,
   StatusBar,
 } from 'react-native';
-import { Card } from 'react-native-shadow-cards';
-import { FloatingAction } from "react-native-floating-action";
+import {Card} from 'react-native-shadow-cards';
+import {FloatingAction} from 'react-native-floating-action';
 // import all basic components
- 
-;
- 
+
 //For React Navigation 4+
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
- 
+
 //Import all the screens
 import Screen1 from '../components/ComplaintsScreen.js';
 
- 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
-import { Icon } from 'react-native-elements';
- 
+import {Icon} from 'react-native-elements';
+
 global.currentScreenIndex = 0;
 //Navigation Drawer Structure for all screen
 
 class MenuIcon extends Component {
- 
-    toggleDrawer = () => {
-   
-      this.props.navigationProps.toggleDrawer();
-   
-    }
-   
-    render() {
-   
-      return (
-   
-        <View style={{ flexDirection: 'row' }}>
-   
-          <TouchableOpacity onPress={this.toggleDrawer.bind(this)} >
-   
-            <Image
-              source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2018/04/hamburger_icon.png' }}
-              style={{ width: 20, height: 20, marginLeft: 10 , tintColor:'white'}}
-            />
-   
-          </TouchableOpacity>
-   
-        </View>
-   
-      );
-   
-   
-    }
+  toggleDrawer = () => {
+    this.props.navigationProps.toggleDrawer();
+  };
+
+  render() {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
+          <Image
+            source={{
+              uri:
+                'https://reactnativecode.com/wp-content/uploads/2018/04/hamburger_icon.png',
+            }}
+            style={{width: 20, height: 20, marginLeft: 10, tintColor: 'white'}}
+          />
+        </TouchableOpacity>
+      </View>
+    );
   }
-  const actions = [
-    {
-      text: "Create a Complain",
-      icon: require("../assets/icons/pencil-48.png"),
-      name: "bt_createComplain",
-      position: 1
-    },
-   
-  ];
+}
+const actions = [
+  {
+    text: 'Create a Complain',
+    icon: require('../assets/icons/pencil-48.png'),
+    name: 'bt_createComplain',
+    position: 1,
+  },
+];
 class HomeScreen extends Component {
-  
   //Top Navigation Header with Donute Button
   toggleDrawer = () => {
     //Props to open/close the drawer
@@ -82,67 +68,133 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.mainnContainer}>
-         <StatusBar
-        backgroundColor="green"
-                barStyle="light-content"></StatusBar>
-            <Card style = {styles.bigCards} >
-                <View style= {{ alignItems:'center', justifyContent:'center', flex:1, flexDirection:'column', backgroundColor:'#00B5B8'}}>
-                <Text style={{fontSize:56 , color:'white', fontWeight:'bold'  }}>0</Text>
-            <Text style={{ fontSize: 24, color: 'white', fontStyle: 'normal', fontWeight: 'bold' }}> TOTAL Complaints </Text>
-                  
-                </View>
-        </Card>
-        <Card style = {styles.bigCards} >
-                <View style= {{ alignItems:'center', justifyContent:'center', flex:1, flexDirection:'column', backgroundColor:'#3CB371'}}>
-                <Text style={{fontSize:56 , color:'white', fontWeight:'bold'  }}>0</Text>       
-            <Text style={{ fontSize: 24, color: 'white', fontStyle: 'normal', fontWeight: 'bold' }}> Resolved Complaints </Text>
-                   
-                </View>
-            </Card>
-          <View style={{flex:1 , flexDirection:'row' , alignItems:'center' , justifyContent:'center'}}>
-             <Card style = {styles.cardStyle}>
-                <View style= {{backgroundColor:'#F4A460' , flex:1 , justifyContent:'center' , alignItems:'center',flexDirection:'column'}}>
-                <Text style={{color:'white' , fontSize:28 , fontWeight:'bold' }}>0</Text>   
-              <Text style={{ color: 'white', fontSize: 16, fontFamily: 'sans-serif' }}>Pending Complaints</Text>
-                      
-                </View>
-            </Card>
-          <Card style={{ marginTop: 15, flex: 1, marginLeft: 10, marginRight:10}}>
-            <View style= {{backgroundColor:'#F08080' , flex:1 , justifyContent:'center' , alignItems:'center',flexDirection:'column'}}>
-              <Text style={{ color: 'white', fontSize: 28, fontWeight: 'bold' }}>0</Text>
-              <Text style={{color:'white' , fontSize:16 , fontFamily:'sans-serif'}}>In-Progress Complaints</Text>
-              
-                </View>
-            </Card>
-
+        <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
+        <Card style={styles.bigCards}>
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              flex: 1,
+              flexDirection: 'column',
+              backgroundColor: '#00B5B8',
+            }}>
+            <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
+              0
+            </Text>
+            <Text
+              style={{
+                fontSize: 24,
+                color: 'white',
+                fontStyle: 'normal',
+                fontWeight: 'bold',
+              }}>
+              {' '}
+              TOTAL Complaints{' '}
+            </Text>
           </View>
-            
-        <View style={{ flex: 1 }}>
-          
-     
-                </View>
-                <View style={{flex:1}}></View>
-        <View style={{ flex: 1 ,right:10}}>
-        <FloatingAction
-                  actions={actions}
-                 onPressItem={name => {console.log("selected button:")}} />
-                </View>
-                    
+        </Card>
+        <Card style={styles.bigCards}>
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              flex: 1,
+              flexDirection: 'column',
+              backgroundColor: '#3CB371',
+            }}>
+            <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
+              0
+            </Text>
+            <Text
+              style={{
+                fontSize: 24,
+                color: 'white',
+                fontStyle: 'normal',
+                fontWeight: 'bold',
+              }}>
+              {' '}
+              Resolved Complaints{' '}
+            </Text>
+          </View>
+        </Card>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Card style={styles.cardStyle}>
+            <View
+              style={{
+                backgroundColor: '#F4A460',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}>
+              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
+                0
+              </Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontFamily: 'sans-serif',
+                }}>
+                Pending Complaints
+              </Text>
+            </View>
+          </Card>
+          <Card
+            style={{marginTop: 15, flex: 1, marginLeft: 10, marginRight: 10}}>
+            <View
+              style={{
+                backgroundColor: '#F08080',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}>
+              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
+                0
+              </Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 16,
+                  fontFamily: 'sans-serif',
+                }}>
+                In-Progress Complaints
+              </Text>
+            </View>
+          </Card>
+        </View>
 
+        <View style={{flex: 1}}></View>
+        <View style={{flex: 1}}></View>
+        <View style={{flex: 1, right: 10}}>
+          <FloatingAction
+            actions={actions}
+            onPressItem={name => {
+              console.log('selected button:');
+            }}
+          />
+        </View>
       </View>
     );
   }
 }
- 
+
 //Stack Navigator for the First Option of Navigation Drawer
 const FirstActivity_StackNavigator = createStackNavigator({
   //All the screen from the First Option will be indexed here
   First: {
     screen: HomeScreen,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: ({navigation}) => ({
       title: 'Dashboard',
       headerLeft: <MenuIcon navigationProps={navigation} />,
-      
+
       headerStyle: {
         backgroundColor: 'green',
       },
@@ -150,16 +202,16 @@ const FirstActivity_StackNavigator = createStackNavigator({
     }),
   },
 });
- 
+
 //Stack Navigator for the Second Option of Navigation Drawer
 const Screen2_StackNavigator = createStackNavigator({
   //All the screen from the Second Option will be indexed here
   Second: {
     screen: Screen1,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 2',
       headerLeft: <MenuIcon navigationProps={navigation} />,
- 
+
       headerStyle: {
         backgroundColor: 'green',
       },
@@ -167,16 +219,16 @@ const Screen2_StackNavigator = createStackNavigator({
     }),
   },
 });
- 
+
 //Stack Navigator for the Third Option of Navigation Drawer
 const Screen3_StackNavigator = createStackNavigator({
   //All the screen from the Third Option will be indexed here
   Third: {
     screen: Screen1,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 3',
       headerLeft: <MenuIcon navigationProps={navigation} />,
-      
+
       headerStyle: {
         backgroundColor: 'green',
       },
@@ -184,7 +236,7 @@ const Screen3_StackNavigator = createStackNavigator({
     }),
   },
 });
- 
+
 //Drawer Navigator Which will provide the structure of our App
 const DrawerNavigatorExample = createDrawerNavigator(
   {
@@ -213,19 +265,16 @@ const DrawerNavigatorExample = createDrawerNavigator(
     contentComponent: CustomSidebarMenu,
     //Sidebar width
     drawerWidth: Dimensions.get('window').width - 100,
-  }
+  },
 );
 
 export default createAppContainer(DrawerNavigatorExample);
 const styles = StyleSheet.create({
-
   cardStyle: {
     marginTop: 15,
     flex: 1,
-    
+
     marginLeft: 10,
-    
-        
   },
   bigCards: {
     marginTop: 15,
@@ -233,9 +282,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   mainnContainer: {
-        alignItems:'center',
-     flex:1,
-    flexDirection: 'column'
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'column',
   },
-   
 });
