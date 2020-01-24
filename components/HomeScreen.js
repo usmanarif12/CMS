@@ -12,7 +12,13 @@ import {
   StatusBar,
 } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
+<<<<<<< HEAD
 import {FloatingAction} from 'react-native-floating-action';
+=======
+
+import ActionButton from 'react-native-action-button';
+
+>>>>>>> d6909137f0126d535f1f5c38a35337d005fc3076
 // import all basic components
 
 //For React Navigation 4+
@@ -25,7 +31,11 @@ import Screen1 from '../components/ComplaintsScreen.js';
 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
+<<<<<<< HEAD
 import {Icon} from 'react-native-elements';
+=======
+import {Icon} from 'react-native-vector-icons';
+>>>>>>> d6909137f0126d535f1f5c38a35337d005fc3076
 
 global.currentScreenIndex = 0;
 //Navigation Drawer Structure for all screen
@@ -174,12 +184,26 @@ class HomeScreen extends Component {
         <View style={{flex: 1}}></View>
         <View style={{flex: 1}}></View>
         <View style={{flex: 1, right: 10}}>
+<<<<<<< HEAD
           <FloatingAction
             actions={actions}
             onPressItem={name => {
               console.log('selected button:');
             }}
           />
+=======
+        <ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => console.log("notes tapped!")}>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
+            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
+            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
+>>>>>>> d6909137f0126d535f1f5c38a35337d005fc3076
         </View>
       </View>
     );
@@ -285,5 +309,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     flexDirection: 'column',
+<<<<<<< HEAD
+=======
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
+>>>>>>> d6909137f0126d535f1f5c38a35337d005fc3076
   },
 });
