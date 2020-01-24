@@ -1,5 +1,6 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+
 //import react in our code.
 import {
   View,
@@ -10,9 +11,11 @@ import {
   Platform,
   Text,
   StatusBar,
+  TouchableHighlight,
+  Alert
 } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
-
+import complaintsTypeScreen from '../components/ComplaintTypesScreen.js';
 import ActionButton from 'react-native-action-button';
 
 // import all basic components
@@ -21,10 +24,10 @@ import ActionButton from 'react-native-action-button';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
-
+import launchComplainIcon from '../assets/icons/pencil-48.png'
 //Import all the screens
 import Screen1 from '../components/ComplaintsScreen.js';
-import launchComplainIcon from '../assets/icons/pencil-48.png'
+
 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
@@ -37,7 +40,7 @@ class MenuIcon extends Component {
   toggleDrawer = () => {
     this.props.navigationProps.toggleDrawer();
   };
-
+ 
   render() {
     return (
       <View style={{flexDirection: 'row'}}>
@@ -54,15 +57,17 @@ class MenuIcon extends Component {
     );
   }
 }
-class LaunchComplainIcon extends Component {
- 
+
+ class LaunchComplainIcon extends Component {
   render() {
+  
+
     return (
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity >
+        <TouchableOpacity>
           <Image
             source={launchComplainIcon}
-            style={{width: 20, height: 20, marginLeft: 10, tintColor: 'white'}}
+            style={{width: 20, height: 20, marginRight: 15, tintColor: 'white'}}
           />
         </TouchableOpacity>
       </View>
@@ -70,13 +75,17 @@ class LaunchComplainIcon extends Component {
   }
 }
 
+
 class HomeScreen extends Component {
   //Top Navigation Header with Donute Button
   toggleDrawer = () => {
     //Props to open/close the drawer
     this.props.navigationProps.toggleDrawer();
   };
+
   render() {
+    
+    
     return (
       <View style={styles.mainnContainer}>
         <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
@@ -99,8 +108,8 @@ class HomeScreen extends Component {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
               }}>
-              {' '}
-              TOTAL Complaints{' '}
+             
+              TOTAL Complaints
             </Text>
           </View>
         </Card>
@@ -123,8 +132,8 @@ class HomeScreen extends Component {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
               }}>
-              {' '}
-              Resolved Complaints{' '}
+             
+              Resolved Complaints
             </Text>
           </View>
         </Card>
@@ -185,17 +194,16 @@ class HomeScreen extends Component {
         <View style={{flex: 1}}></View>
         <View style={{flex: 1}}></View>
         <View style={{flex: 1, right: 10}}>
-        {/* <ActionButton buttonColor="rgba(231,76,60,1)">
-          <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => console.log("notes tapped!")}>
-            <Icon name="md-create" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-          <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
-            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-          <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
-            <Icon name="md-done-all" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-        </ActionButton> */}
+        <Card style= {styles.cardButton}>
+            <TouchableHighlight
+              style={{width: '100%', alignItems: 'center'}}
+              underlayColor="#2094D0"
+              onPress={() =>  this.props.navigation.navigate('complaintsType')}>
+              <View>
+                <Text style={{color: 'white'}}> SIGN ME IN </Text>
+              </View>
+            </TouchableHighlight>
+            </Card>
         </View>
       </View>
     );
@@ -209,8 +217,8 @@ const FirstActivity_StackNavigator = createStackNavigator({
     screen: HomeScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Dashboard',
-      headerLeft: <MenuIcon navigationProps={navigation} />,
-      headerRight: <LaunchComplainIcon/>,
+      headerLeft:()=> <MenuIcon navigationProps={navigation} />,
+      headerRight: () => <LaunchComplainIcon />,
 
 
       headerStyle: {
@@ -228,8 +236,8 @@ const Screen2_StackNavigator = createStackNavigator({
     screen: Screen1,
     navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 2',
-      headerLeft: <MenuIcon navigationProps={navigation} />,
-      headerRight: <LaunchComplainIcon/>,
+      headerLeft:()=> <MenuIcon navigationProps={navigation} />,
+      headerRight:()=> <LaunchComplainIcon/>,
 
       headerStyle: {
         backgroundColor: 'green',
@@ -246,8 +254,8 @@ const Screen3_StackNavigator = createStackNavigator({
     screen: Screen1,
     navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 3',
-      headerLeft: <MenuIcon navigationProps={navigation} />,
-      headerRight: <LaunchComplainIcon/>,
+      headerLeft:()=> <MenuIcon navigationProps={navigation} />,
+      headerRight:()=><LaunchComplainIcon/>,
 
 
       headerStyle: {
@@ -289,7 +297,7 @@ const DrawerNavigatorExample = createDrawerNavigator(
   },
 );
 
-export default createAppContainer(DrawerNavigatorExample);
+
 const styles = StyleSheet.create({
   cardStyle: {
     marginTop: 15,
@@ -306,9 +314,33 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
+  cardButton: {
+    width: '90%',
+    height: 40,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'black',
+  },
   actionButtonIcon: {
     fontSize: 20,
     height: 22,
     color: 'white',
   },
 });
+
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen:DrawerNavigatorExample ,
+  navigationOptions: {
+      headerShown: false,
+    },
+  },
+  complaintsType: {
+    screen: complaintsTypeScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  });
+  export default createAppContainer(AppNavigator);
