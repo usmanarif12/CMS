@@ -15,27 +15,42 @@ export default class CustomSidebarMenu extends Component {
     //You can find the Icons from here https://material.io/tools/icons/
     this.items = [
       {
-        navOptionThumb: 'camera',
+        navOptionThumb: 'dashboard',
         navOptionName: 'Dashboard',
         screenToNavigate: 'NavScreen1',
       },
       {
-        navOptionThumb: 'image',
-        navOptionName: 'Complaints',
+        navOptionThumb: 'edit',
+        navOptionName: 'Launch Complaints',
         screenToNavigate: 'NavScreen2',
       },
       {
-        navOptionThumb: 'account-circle',
-        navOptionName: 'Profile',
+        navOptionThumb: 'error',
+        navOptionName: 'Complaints',
+        screenToNavigate: 'NavScreen3',
+        },
+      {
+        navOptionThumb: 'email',
+        navOptionName: 'Inbox',
+        screenToNavigate: 'NavScreen3',
+      },
+      {
+        navOptionThumb: 'account-box',
+        navOptionName: 'Accounts',
+        screenToNavigate: 'NavScreen3',
+      },
+      {
+        navOptionThumb: 'assignment-turned-in',
+        navOptionName: 'Package Plan',
         screenToNavigate: 'NavScreen3',
         },
         {
-            navOptionThumb: 'email',
-            navOptionName: 'Inbox',
+            navOptionThumb: 'cloud-download',
+            navOptionName: 'Updates',
             screenToNavigate: 'NavScreen3',
         },
         {
-            navOptionThumb: 'build',
+            navOptionThumb: 'exit-to-app',
             navOptionName: 'Logout',
             screenToNavigate: 'NavScreen3',
           },
@@ -73,12 +88,12 @@ export default class CustomSidebarMenu extends Component {
               }}
               key={key}>
               <View style={{ marginRight: 10, marginLeft: 20 }}>
-                <Icon name={item.navOptionThumb} size={25} color="#808080" />
+                <Icon name={item.navOptionThumb} size={30} color="green" />
               </View>
               <Text
                 style={{
                   fontSize: 15,
-                  color: global.currentScreenIndex === key ? 'red' : 'black',
+                  color: global.currentScreenIndex === key ? 'black' : 'green',
                 }}
                 onPress={() => {
                   global.currentScreenIndex = key;
@@ -102,9 +117,9 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   sideMenuProfileIcon: {
-    resizeMode: 'center',
-    width: 150,
-    height: 150,
+    
+    width: 180,
+    height: 180,
     marginTop: 20,
     borderRadius: 150 / 2,
   },

@@ -1,17 +1,3 @@
-
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
-
-export default class ComplaintTypeScreen extends Component {
-  render() {
-    return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
-    )
-  }
-}
-
 import React, {Component} from 'react';
 import {
   Text,
@@ -25,250 +11,102 @@ import {
   Alert,
   TouchableHighlight,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {Card} from 'react-native-shadow-cards';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import agricultureicon from '../assets/icons/agriculture.png';
+import bankicon from '../assets/icons/bank.png';
+import communicationicon from '../assets/icons/communication.png';
+import developmenticon from '../assets/icons/development.png';
+import disastericon from '../assets/icons/disaster.png';
+import educationicon from '../assets/icons/education.png';
+import energyicon from '../assets/icons/energy.png';
+import foresticon from '../assets/icons/forest.png';
+import closeComplaint from '../components/closeComplainScreen.js';
+import LaunchComplain from '../components/LaunchComplain.js'
 
+import {createAppContainer} from 'react-navigation';
+import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createStackNavigator} from 'react-navigation-stack';
 
-export default class ComplaintTypes extends Component {
- render() {
-return (
-    <ScrollView>
+class ComplaintTypes extends Component {
 
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <ScrollView>
+        <View style={styles.Container}>
+          <StatusBar
+            backgroundColor="green"
+            barStyle="light-content"></StatusBar>
 
-   
-      <View style={styles.Container}>
-        <StatusBar
-          backgroundColor="#ffffff"
-          barStyle="dark-content"></StatusBar>
-
-        
-
-<View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Card style={styles.cardStyle}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
-                0
-              </Text>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-               Agriculture
-              </Text>
-            </View>
-          </Card>
-          <Card
-            style={{marginTop: 15, flex: 1, marginLeft: 10, marginRight: 10}}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
-                0
-              </Text>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-               Banking
-              </Text>
-            </View>
-          </Card>
-        </View>
           
+          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
+            <TouchableHighlight  onPress={() =>navigate('CloseComplaint', "Agriculture")}>
 
-
-
-          // second row
-
-
-          <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Card style={styles.cardStyle}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
-                0
-              </Text>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-               Communications
-              </Text>
-            </View>
-          </Card>
-          <Card
-            style={{marginTop: 15, flex: 1, marginLeft: 10, marginRight: 10}}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
-                0
-              </Text>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-                Development Projects
-              </Text>
-            </View>
-          </Card>
-        </View>
-
-
-        //third row
-
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Card style={styles.cardStyle}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-             
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-               Disaster / Emergency
-              </Text>
-            </View>
-          </Card>
-          <Card
-            style={{marginTop: 15, flex: 1, marginLeft: 10, marginRight: 10}}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
+            <Card style={{ height: 150, width: 150, marginRight: 20 }}>
               
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-                Education
-              </Text>
-            </View>
-          </Card>
-        </View>
-
-        //Fourth row 
-
-        
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Card style={styles.cardStyle}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={agricultureicon}></Image>
+                <Text>Agriculture</Text>
+              </View>
+            </Card>
+          </TouchableHighlight>
             
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-             Energy & Power
-              </Text>
-            </View>
-          </Card>
-          <Card
-            style={{marginTop: 15, flex: 1, marginLeft: 10, marginRight: 10}}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-                Environment & Forest
-              </Text>
-            </View>
-          </Card>
-        </View>
+            <Card style={{height:150 , width:150}}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={bankicon}></Image>
+                <Text>Banking</Text>
+              </View>
+            </Card>
+          </View>
           
-  
 
-       
-
-     </View>
-
-     </ScrollView>
+          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
+            <Card style={{height:150 , width:150, marginRight:20 }}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={communicationicon}></Image>
+                <Text>Communication</Text>
+              </View>
+            </Card>
+            <Card style={{height:150 , width:150}}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={developmenticon}></Image>
+                <Text>Developement</Text>
+              </View>
+            </Card>
+          </View>
+          
+          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
+            <Card style={{height:150 , width:150, marginRight:20 }}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={disastericon}></Image>
+                <Text>Diasaster</Text>
+              </View>
+            </Card>
+            <Card style={{height:150 , width:150}}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={educationicon}></Image>
+                <Text>Education</Text>
+              </View>
+            </Card>
+          </View>
+          
+          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
+            <Card style={{height:150 , width:150, marginRight:20 }}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={foresticon}></Image>
+                <Text>Forest</Text>
+              </View>
+            </Card>
+            <Card style={{height:150 , width:150}}>
+              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Image style={{height:100,width:100}} resizeMode="center" source={energyicon}></Image>
+                <Text>Energy</Text>
+              </View>
+            </Card>
+              </View>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -279,9 +117,34 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     flex: 1,
   },
-
+  iconStyle: {
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    resizeMode:'center'
+  },
 });
-
-
-
-
+const AppNavigator = createStackNavigator({
+  
+  complaintsType: {
+    screen: ComplaintTypes,
+    navigationOptions: ({navigation}) => ({
+      title: 'Complaints Type',
+      headerStyle: {
+        backgroundColor: 'green',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  CloseComplaint: {
+    screen:closeComplaint ,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: 'green',
+      },
+      headerTintColor:'white'
+},
+  },
+  });
+  export default createAppContainer(AppNavigator);
