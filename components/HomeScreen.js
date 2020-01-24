@@ -1,5 +1,5 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 //import react in our code.
 import {
@@ -12,7 +12,7 @@ import {
   Text,
   StatusBar,
   TouchableHighlight,
-  Alert
+  Alert,
 } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import complaintsTypeScreen from '../components/ComplaintTypesScreen.js';
@@ -24,10 +24,9 @@ import ActionButton from 'react-native-action-button';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
-import launchComplainIcon from '../assets/icons/pencil-48.png'
+import launchComplainIcon from '../assets/icons/pencil-48.png';
 //Import all the screens
 import Screen1 from '../components/ComplaintsScreen.js';
-
 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
@@ -40,7 +39,7 @@ class MenuIcon extends Component {
   toggleDrawer = () => {
     this.props.navigationProps.toggleDrawer();
   };
- 
+
   render() {
     return (
       <View style={{flexDirection: 'row'}}>
@@ -58,10 +57,8 @@ class MenuIcon extends Component {
   }
 }
 
- class LaunchComplainIcon extends Component {
+class LaunchComplainIcon extends Component {
   render() {
-  
-
     return (
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity>
@@ -75,7 +72,6 @@ class MenuIcon extends Component {
   }
 }
 
-
 class HomeScreen extends Component {
   //Top Navigation Header with Donute Button
   toggleDrawer = () => {
@@ -84,8 +80,6 @@ class HomeScreen extends Component {
   };
 
   render() {
-    
-    
     return (
       <View style={styles.mainnContainer}>
         <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
@@ -108,7 +102,6 @@ class HomeScreen extends Component {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
               }}>
-             
               TOTAL Complaints
             </Text>
           </View>
@@ -132,7 +125,6 @@ class HomeScreen extends Component {
                 fontStyle: 'normal',
                 fontWeight: 'bold',
               }}>
-             
               Resolved Complaints
             </Text>
           </View>
@@ -191,19 +183,32 @@ class HomeScreen extends Component {
           </Card>
         </View>
 
-        <View style={{flex: 1}}></View>
-        <View style={{flex: 1}}></View>
-        <View style={{flex: 1, right: 10}}>
-        <Card style= {styles.cardButton}>
+        <View
+          style={{
+            flex: 3,
+            justifyContent: 'flex-end',
+            height: 50,
+            width: '100%',
+            alignItems: 'center',
+            marginBottom: 20,
+          }}>
+          <Card style={styles.cardButton}>
             <TouchableHighlight
               style={{width: '100%', alignItems: 'center'}}
               underlayColor="#2094D0"
-              onPress={() =>  this.props.navigation.navigate('complaintsType')}>
-              <View>
-                <Text style={{color: 'white'}}> SIGN ME IN </Text>
+              onPress={() => this.props.navigation.navigate('complaintsType')}>
+              <View style={{ flexDirection: 'row'}}>
+                <Image
+                  source={launchComplainIcon}
+                  style={{width: 25, height: 25,marginRight:20, tintColor: 'white'}}
+                />
+                <Text
+                  style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
+                 Launch Complain
+                </Text>
               </View>
             </TouchableHighlight>
-            </Card>
+          </Card>
         </View>
       </View>
     );
@@ -217,9 +222,8 @@ const FirstActivity_StackNavigator = createStackNavigator({
     screen: HomeScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Dashboard',
-      headerLeft:()=> <MenuIcon navigationProps={navigation} />,
+      headerLeft: () => <MenuIcon navigationProps={navigation} />,
       headerRight: () => <LaunchComplainIcon />,
-
 
       headerStyle: {
         backgroundColor: 'green',
@@ -235,9 +239,9 @@ const Screen2_StackNavigator = createStackNavigator({
   Second: {
     screen: Screen1,
     navigationOptions: ({navigation}) => ({
-      title: 'Demo Screen 2',
-      headerLeft:()=> <MenuIcon navigationProps={navigation} />,
-      headerRight:()=> <LaunchComplainIcon/>,
+      title: 'Complaints',
+      headerLeft: () => <MenuIcon navigationProps={navigation} />,
+      headerRight: () => <LaunchComplainIcon />,
 
       headerStyle: {
         backgroundColor: 'green',
@@ -254,9 +258,8 @@ const Screen3_StackNavigator = createStackNavigator({
     screen: Screen1,
     navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 3',
-      headerLeft:()=> <MenuIcon navigationProps={navigation} />,
-      headerRight:()=><LaunchComplainIcon/>,
-
+      headerLeft: () => <MenuIcon navigationProps={navigation} />,
+      headerRight: () => <LaunchComplainIcon />,
 
       headerStyle: {
         backgroundColor: 'green',
@@ -297,7 +300,6 @@ const DrawerNavigatorExample = createDrawerNavigator(
   },
 );
 
-
 const styles = StyleSheet.create({
   cardStyle: {
     marginTop: 15,
@@ -316,7 +318,8 @@ const styles = StyleSheet.create({
   },
   cardButton: {
     width: '90%',
-    height: 40,
+    height: 50,
+
     backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
@@ -331,8 +334,8 @@ const styles = StyleSheet.create({
 
 const AppNavigator = createStackNavigator({
   Home: {
-    screen:DrawerNavigatorExample ,
-  navigationOptions: {
+    screen: DrawerNavigatorExample,
+    navigationOptions: {
       headerShown: false,
     },
   },
@@ -340,7 +343,8 @@ const AppNavigator = createStackNavigator({
     screen: complaintsTypeScreen,
     navigationOptions: {
       headerShown: false,
-    },
+}
+   
   },
-  });
-  export default createAppContainer(AppNavigator);
+});
+export default createAppContainer(AppNavigator);
