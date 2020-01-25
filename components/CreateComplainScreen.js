@@ -4,7 +4,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import { Card } from 'react-native-shadow-cards';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
 
-export default class CloseComplaint extends Component {
+export default class CreateComplaintScreen extends Component {
   constructor(props) {
     super(props);
     this.State = {
@@ -181,7 +181,7 @@ export default class CloseComplaint extends Component {
                 />
                 <Text
                   style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-                 Launch Complain
+                 Create Complaint
                 </Text>
               </View>
             </TouchableHighlight>

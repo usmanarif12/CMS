@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 // import all basic components
  
-export default class ComplaintsScreen extends Component {
+export default class ViewComplaints extends Component {
   //Screen1 Component
   render() {
     return (
