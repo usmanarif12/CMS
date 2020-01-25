@@ -89,7 +89,9 @@ class Login extends Component {
         <StatusBar
           backgroundColor="#ffffff"
           barStyle="dark-content"></StatusBar>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+
+          <Card style={{height:500,width:'100%',}}>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Image source={SplashIcon} style={styles.loginIcon} />
           <Text style={styles.logoText}>Login</Text>
         </View>
@@ -133,8 +135,17 @@ class Login extends Component {
                 <Text style={{color: 'white'}}> SIGN ME IN </Text>
               </View>
             </TouchableHighlight>
+
+
+            
             </Card>
         </View>
+        <View style={{alignItems:'center',marginTop:30,justifyContent:'center'}}> 
+        <Text style={styles.forgetText}>Forget Password? Click here.</Text>
+        </View>
+       
+          </Card>
+       
       </View>
     );
   }
@@ -203,6 +214,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  forgetText: {
+    color: 'green',
+    fontSize: 20,
+    fontStyle:'italic',
+    textDecorationLine: 'none',
+    
+  
+  },
   heading: {
     color: '#34495E',
     fontSize: 16,
@@ -241,16 +260,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignItems: 'center',
   },
-  RegisterText: {
-    color: '#566573',
-    fontSize: 18,
-    marginTop: 10,
-  },
-  ForgetPassText: {
-    color: '#566573',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
+
   horizontal: {
     marginTop: 20,
     flexDirection: 'row',

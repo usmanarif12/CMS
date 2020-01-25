@@ -21,7 +21,7 @@ import disastericon from '../assets/icons/disaster.png';
 import educationicon from '../assets/icons/education.png';
 import energyicon from '../assets/icons/energy.png';
 import foresticon from '../assets/icons/forest.png';
-import closeComplaint from '../components/closeComplainScreen.js';
+import createComplaint from './CreateComplainScreen.js';
 import LaunchComplain from '../components/LaunchComplain.js'
 
 import {createAppContainer} from 'react-navigation';
@@ -41,7 +41,7 @@ class ComplaintTypes extends Component {
 
           
           <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
-            <TouchableHighlight  onPress={() =>navigate('CloseComplaint', "Agriculture")}>
+            <TouchableHighlight  onPress={() =>navigate('createComplaint', "Agriculture")}>
 
             <Card style={{ height: 150, width: 150, marginRight: 20 }}>
               
@@ -137,14 +137,16 @@ const AppNavigator = createStackNavigator({
       headerTintColor: '#fff',
     }),
   },
-  CloseComplaint: {
-    screen:closeComplaint ,
-    navigationOptions: {
+  createComplaint: {
+    screen: createComplaint,
+    navigationOptions: ({navigation}) => ({
+      title: 'Create your Complaint',
       headerStyle: {
         backgroundColor: 'green',
       },
-      headerTintColor:'white'
-},
+      headerTintColor: '#fff',
+    }),
+ 
   },
   });
   export default createAppContainer(AppNavigator);
