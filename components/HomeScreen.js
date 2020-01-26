@@ -1,6 +1,6 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
 import React, {Component} from 'react';
-
+import ViewComplaintsScreen from '../components/ViewComplaints.js';
 //import react in our code.
 import {
   View,
@@ -30,6 +30,7 @@ import Screen1 from '../components/ComplaintsScreen.js';
 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
+import TotalComplaintsList from '../components/TotalComplaintsList.js';
 import {Icon} from 'react-native-vector-icons';
 
 global.currentScreenIndex = 0;
@@ -83,7 +84,9 @@ class HomeScreen extends Component {
     return (
       <View style={styles.mainnContainer}>
         <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
-        <Card style={styles.bigCards}>
+
+        <TouchableHighlight  style={styles.bigCards} onPress={() => this.props.navigation.navigate('ViewComplaintsScreen')} >
+        <Card style={styles.bigCards}  >
           <View
             style={{
               alignItems: 'center',
@@ -106,6 +109,9 @@ class HomeScreen extends Component {
             </Text>
           </View>
         </Card>
+
+        </TouchableHighlight>
+    
         <Card style={styles.bigCards}>
           <View
             style={{
@@ -341,6 +347,20 @@ const AppNavigator = createStackNavigator({
   },
   complaintsType: {
     screen: complaintsTypeScreen,
+    navigationOptions: {
+      headerShown: false,
+}
+   
+  },
+  TotalComplaintsList: {
+    screen: TotalComplaintsList,
+    navigationOptions: {
+      headerShown: false,
+}
+   
+  },
+  ViewComplaintsScreen: {
+    screen: ViewComplaintsScreen,
     navigationOptions: {
       headerShown: false,
 }
