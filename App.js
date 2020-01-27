@@ -15,6 +15,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { Card } from 'react-native-shadow-cards';
 import HomeScreen from './components/HomeScreen';
+import ForgetPasswordScreen from './components/ForgetPasswordScreen';
 
 
 import SplashIcon from './assets/icons/logo.png';
@@ -140,9 +141,13 @@ class Login extends Component {
             
             </Card>
         </View>
+        <TouchableHighlight onPress={() =>  this.props.navigation.navigate('ForgetPassword')} >
         <View style={{alignItems:'center',marginTop:30,justifyContent:'center'}}> 
         <Text style={styles.forgetText}>Forget Password? Click here.</Text>
         </View>
+
+        </TouchableHighlight>
+     
        
           </Card>
        
@@ -279,6 +284,12 @@ const AppNavigator = createStackNavigator({
   },
   Home: {
     screen: HomeScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  ForgetPassword: {
+    screen: ForgetPasswordScreen,
     navigationOptions: {
       headerShown: false,
     },
