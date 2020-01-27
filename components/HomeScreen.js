@@ -1,6 +1,6 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
 import React, {Component} from 'react';
-
+import ViewComplaintsScreen from '../components/ViewComplaints.js';
 //import react in our code.
 import {
   View,
@@ -30,6 +30,7 @@ import Screen1 from '../components/ComplaintsScreen.js';
 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
+import TotalComplaintsList from '../components/TotalComplaintsList.js';
 import {Icon} from 'react-native-vector-icons';
 import totalComplaintsIcon from '../assets/icons/document.png';
 import resolvedComplaintsIcon from '../assets/icons/checklist.png';
@@ -87,7 +88,9 @@ class HomeScreen extends Component {
     return (
       <View style={styles.mainnContainer}>
         <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
-        <Card style={styles.bigCards}>
+
+        <TouchableHighlight  style={styles.bigCards} onPress={() => this.props.navigation.navigate('TotalComplaintsList')} >
+        <Card style={styles.bigCards}  >
           <View
             style={{
               alignItems: 'center',
@@ -117,6 +120,9 @@ class HomeScreen extends Component {
             </View>
           </View>
         </Card>
+
+        </TouchableHighlight>
+    
         <Card style={styles.bigCards}>
           <View
             style={{
@@ -381,6 +387,20 @@ const AppNavigator = createStackNavigator({
     navigationOptions: {
       headerShown: false,
     },
+  },
+  TotalComplaintsList: {
+    screen: TotalComplaintsList,
+    navigationOptions: {
+      headerShown: false,
+}
+   
+  },
+  ViewComplaintsScreen: {
+    screen: ViewComplaintsScreen,
+    navigationOptions: {
+      headerShown: false,
+}
+   
   },
 });
 export default createAppContainer(AppNavigator);
