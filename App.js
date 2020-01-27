@@ -112,7 +112,6 @@ class Login extends Component {
                 secureTextEntry={true}
               />
 
-<<<<<<< HEAD
               <View
                 style={{
                   justifyContent: 'center',
@@ -152,22 +151,6 @@ class Login extends Component {
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-=======
-            
-            </Card>
-        </View>
-        <TouchableHighlight onPress={() =>  this.props.navigation.navigate('ForgetPassword')} >
-        <View style={{alignItems:'center',marginTop:30,justifyContent:'center'}}> 
-        <Text style={styles.forgetText}>Forget Password? Click here.</Text>
-        </View>
-
-        </TouchableHighlight>
-     
-       
-          </Card>
-       
-      </View>
->>>>>>> ce125c2a26bbea4a29bc4f92350b6b0f00ffdfa1
     );
   }
 }
@@ -324,8 +307,6 @@ const AppNavigator = createStackNavigator({
       headerShown: false,
     },
   },
-<<<<<<< HEAD
-=======
   ForgetPassword: {
     screen: ForgetPasswordScreen,
     navigationOptions: {
@@ -333,6 +314,5 @@ const AppNavigator = createStackNavigator({
     },
   },
 
->>>>>>> ce125c2a26bbea4a29bc4f92350b6b0f00ffdfa1
 });
 export default createAppContainer(AppNavigator);
