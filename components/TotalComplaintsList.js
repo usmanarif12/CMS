@@ -9,6 +9,8 @@ import {  } from 'react-native-gesture-handler';
 
 class TotalComplaintsList extends Component{
 
+  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +18,7 @@ class TotalComplaintsList extends Component{
       date: '',
     };
   }
+
   componentDidMount() {
     var that = this;
     var date = new Date().getDate(); //Current Date
@@ -36,7 +39,7 @@ class TotalComplaintsList extends Component{
     >
       <View style={{flexDirection:'row' ,marginTop:20, justifyContent:'flex-end' , marginRight:20}}>
 
-         <Button title="Total Complaints "/>
+         
       </View>
 
       <View
@@ -52,42 +55,42 @@ class TotalComplaintsList extends Component{
 <View style={{flexDirection: 'row'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
-              marginLeft: 30,
+              marginLeft: 20,
             }}>
            {this.state.date}
           </Text>
 
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
-              marginLeft: 40,
+              marginLeft: 20,
             }}>
             Energy |
           </Text>
 
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
-              marginLeft: 30,
+              marginLeft: 10,
             }}>
             In Progress|
           </Text>
@@ -110,9 +113,17 @@ class TotalComplaintsList extends Component{
 
         
 <View style={styles.item}>
+          <View style={{justifyContent:'center' , alignItems:'center'}} >
+            <Text style={{fontSize:28 , fontWeight:'bold' }}>#1</Text>
+          </View>
+          <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' , marginLeft:15}}>
+
+          </View>
+          <View style={{marginLeft:25}}>
+          <Text style={styles.title}>My AC is out of Freon</Text>
+    <Text style={styles.description}>I need a person to repair my AC     ASAP</Text> 
+          </View>
   
-  <Text style={styles.title}>My AC is out of Freon</Text>
-    <Text style={styles.description}>I need a person to repair my AC ASAP</Text> 
 
  
     
@@ -132,40 +143,40 @@ class TotalComplaintsList extends Component{
 <View style={{flexDirection: 'row'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
-              marginLeft: 30,
+              marginLeft: 20,
             }}>
            {this.state.date}
           </Text>
 
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
-              marginLeft: 40,
+              marginLeft: 20,
             }}>
             Disaster |
           </Text>
 
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
               marginLeft: 30,
             }}>
@@ -197,10 +208,18 @@ class TotalComplaintsList extends Component{
 
         
 <View style={styles.item}>
-  
-  <Text style={styles.title}>My home has been damaged due to flood in my area</Text>
-    <Text style={styles.description}>I need a person to repair my damaged home ASAP</Text> 
+<View style={{justifyContent:'center' , alignItems:'center'}} >
+            <Text style={{fontSize:28 , fontWeight:'bold' }}>#2</Text>
+          </View>
+          <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' , marginLeft:15}}>
 
+          </View>
+          <View style={{flexDirection:'column', marginLeft:25}}>
+            <Text style={styles.title}>My home has been damaged</Text>
+          <Text style={styles.description}>I need a person to repair my    damaged home ASAP</Text> 
+
+          </View>
+         
  
     
     </View>
@@ -221,42 +240,42 @@ class TotalComplaintsList extends Component{
 <View style={{flexDirection: 'row'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+            
               marginTop: 10,
-              marginLeft: 30,
+              marginLeft: 20,
             }}>
            {this.state.date}
           </Text>
 
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
-              marginLeft: 40,
+              marginLeft: 20,
             }}>
             Bank |
           </Text>
 
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 16,
               alignItems: 'center',
               color: 'black',
               width: 100,
               padding: 5,
-              fontWeight: 'bold',
+              
               marginTop: 10,
-              marginLeft: 30,
+              marginLeft: 20,
             }}>
             In Progress|
           </Text>
@@ -278,10 +297,17 @@ class TotalComplaintsList extends Component{
 
         
 <View style={styles.item}>
-  
-  <Text style={styles.title}>My bank account is blocked.</Text>
-    <Text style={styles.description}>Please verify my bank account details and unblock it</Text> 
+<View style={{justifyContent:'center' , alignItems:'center'}} >
+            <Text style={{fontSize:28 , fontWeight:'bold' }}>#3</Text>
+          </View>
+          <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' , marginLeft:15}}/>
 
+          <View style={{marginLeft:25}}>
+          <Text style={styles.title}>My bank account is blocked.</Text>
+    <Text style={styles.description}>Please verify my bank account    details and unblock it</Text> 
+
+          </View>
+ 
  
     
     </View>
@@ -313,6 +339,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    flexDirection:'row'
   },
   title: {
     fontSize: 20,
@@ -335,18 +362,12 @@ const AppNavigator = createStackNavigator({
     },
 ViewComplaintsScreen: {
       screen: ViewComplaintsScreen,
-      navigationOptions: {
-        headerShown: false,
-  }
+      navigationOptions : {
+   headerShown:false
+      }
      
     },
-      ViewComplaintsScreen: {
-    screen: ViewComplaintsScreen,
-    navigationOptions: {
-      headerShown: false,
-}
-   
-  },
+
   
   });
   export default createAppContainer(AppNavigator);

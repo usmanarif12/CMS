@@ -88,12 +88,12 @@ export default class CustomSidebarMenu extends Component {
               }}
               key={key}>
               <View style={{ marginRight: 10, marginLeft: 20 }}>
-                <Icon name={item.navOptionThumb} size={30} color="green" />
+                <Icon name={item.navOptionThumb} size={30} color="#6ECF68" />
               </View>
               <Text
                 style={{
                   fontSize: 15,
-                  color: global.currentScreenIndex === key ? 'black' : 'green',
+                  color: global.currentScreenIndex === key ? '#6ECF68' : 'black',
                 }}
                 onPress={() => {
                   global.currentScreenIndex = key;

@@ -122,7 +122,8 @@ class HomeScreen extends Component {
         </Card>
 
         </TouchableHighlight>
-    
+
+        <TouchableHighlight style={styles.bigCards} onPress={() => this.props.navigation.navigate('TotalComplaintsList')}>
         <Card style={styles.bigCards}>
           <View
             style={{
@@ -152,6 +153,9 @@ class HomeScreen extends Component {
             </View>
           </View>
         </Card>
+        </TouchableHighlight>
+    
+        
         <View
           style={{
             flex: 1,
@@ -390,9 +394,16 @@ const AppNavigator = createStackNavigator({
   },
   TotalComplaintsList: {
     screen: TotalComplaintsList,
-    navigationOptions: {
-      headerShown: false,
-}
+    navigationOptions : {
+      title: 'Complaints List',
+      headerStyle: {
+        backgroundColor: 'green',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }
    
   },
   ViewComplaintsScreen: {
