@@ -1,0 +1,151 @@
+import React, {Component} from 'react';
+import forgetPassIcon from '../assets/icons/forgetpassIcon.jpg';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  Button,
+  StatusBar,
+  TextInput,
+  Alert,
+  TouchableHighlight,
+} from 'react-native';
+
+import { Card } from 'react-native-shadow-cards';
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
+
+export default class ForgetPasswordScreen extends Component {
+
+  render() {
+
+    return (
+      <View style={styles.Container}>
+        <StatusBar
+          backgroundColor="#ffffff"
+          barStyle="dark-content"></StatusBar>
+
+          <Card style={{height:400,width:'100%',}}>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Image source={forgetPassIcon} style={styles.loginIcon} />
+          <Text style={styles.logoText}>Forget Password</Text>
+        </View>
+        <View style={{justifyContent:'center' , alignItems:'center',marginTop:10}}>
+        <Text style={styles.text}>Enter your Email below to get a recovery email</Text>
+
+        </View>
+       
+
+        <View>
+          <Text style={styles.heading}>Email*</Text>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={TextInputValue =>
+                this.setState({TextInput_Email: TextInputValue})
+              }
+            />
+          </View>
+        </View>
+
+      
+
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 20,
+          }}>
+            <Card style= {styles.cardButton}>
+            <TouchableHighlight
+              style={{width: '100%', alignItems: 'center'}}
+              underlayColor="#2094D0"
+            >
+              <View>
+                <Text style={{color: 'white'}}>Send Me Recovery Email </Text>
+              </View>
+            </TouchableHighlight>
+
+
+            
+            </Card>
+        </View>
+        
+       
+          </Card>
+       
+      </View>
+    );
+  }
+}
+const styles = StyleSheet.create({
+    Container: {
+      justifyContent: 'center',
+      alignContent: 'center',
+      flex: 2,
+      width:"100%",
+    
+    },
+ 
+    LogoContainer: {
+      justifyContent: 'center',
+      alignContent: 'center',
+      marginTop: 50,
+    },
+  
+    loginIcon: {
+      width: 120,
+      height: 120,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop:20
+    },
+    logoText: {
+      color: 'green',
+      fontSize: 24,
+      fontWeight: 'bold',
+    },
+    text: {
+        color: 'black',
+        fontSize: 17,
+       
+      },
+ 
+    heading: {
+      color: '#34495E',
+      fontSize: 16,
+      marginTop: 9,
+      fontWeight: 'bold',
+      marginLeft: 20,
+    },
+    textInput: {
+      width: '90%',
+      height: 40,
+      borderColor: '#566573',
+      borderWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: 'black',
+    },
+    cardButton: {
+        width: '90%',
+        height: 40,
+        backgroundColor: 'green',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'black',
+      },
+   
+  });
+  

@@ -10,6 +10,7 @@ import {
   TextInput,
   Alert,
   TouchableHighlight,
+  TouchableWithoutFeedback
 } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
@@ -42,7 +43,7 @@ class ComplaintTypes extends Component {
 
           
           <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
-            <TouchableHighlight  onPress={() =>navigate('createComplaint', "Agriculture Complaint")}>
+            <TouchableHighlight  onPress={() =>navigate('createComplaint', {complaintType:'Agriculture Complaint'})}>
 
             <Card style={{ height: 150, width: 150, marginRight: 20 }}>
               
@@ -53,7 +54,7 @@ class ComplaintTypes extends Component {
             </Card>
           </TouchableHighlight >
             
-            <TouchableHighlight onPress={() =>navigate('createComplaint', "Banking Complaint")}>
+            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Banking Complaint'})}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={bankicon}></Image>
@@ -67,7 +68,7 @@ class ComplaintTypes extends Component {
               
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
             
-            <TouchableHighlight onPress={() =>navigate('createComplaint', "Communication Complaint")}>
+            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Communication Complaint'})}>
             <Card style={{height:150 , width:150, marginRight:20 }}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={communicationicon}></Image>
@@ -76,7 +77,7 @@ class ComplaintTypes extends Component {
             </Card>
             </TouchableHighlight>
             
-            <TouchableHighlight onPress={() =>navigate('createComplaint', "Developement Complaint")}>
+            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Developement Complaint'})}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={developmenticon}></Image>
@@ -87,7 +88,7 @@ class ComplaintTypes extends Component {
           </View>
           
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-            <TouchableHighlight onPress={() =>navigate('createComplaint', "Diasaster Complaint")}>
+            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Diasaster Complaint'})}>
             <Card style={{height:150 , width:150, marginRight:20 }}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={disastericon}></Image>
@@ -96,7 +97,7 @@ class ComplaintTypes extends Component {
             </Card>
             </TouchableHighlight>
             
-            <TouchableHighlight onPress={() =>navigate('createComplaint', "Education Complaint")}>
+            <TouchableHighlight onPress={() =>navigate('createComplaint',{complaintType:'Education Complaint'})}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={educationicon}></Image>
@@ -108,7 +109,7 @@ class ComplaintTypes extends Component {
           </View>
           
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-            <TouchableHighlight  onPress={() =>navigate('createComplaint', "Forest Complaint")}>
+            <TouchableHighlight  onPress={() =>navigate('createComplaint', {complaintType:'Forest Complaint'})}>
             <Card style={{height:150 , width:150, marginRight:20 }}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={foresticon}></Image>
@@ -116,7 +117,7 @@ class ComplaintTypes extends Component {
               </View>
             </Card>
             </TouchableHighlight>
-            <TouchableHighlight onPress={() =>navigate('createComplaint', "Energy Complaint")}>
+            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Energy Complaint'})}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={energyicon}></Image>

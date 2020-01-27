@@ -10,12 +10,14 @@ import {
   TextInput,
   Alert,
   TouchableHighlight,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import { Card } from 'react-native-shadow-cards';
+import {Card} from 'react-native-shadow-cards';
 import HomeScreen from './components/HomeScreen';
-
+import ForgetPasswordScreen from './components/ForgetPasswordScreen';
 
 import SplashIcon from './assets/icons/logo.png';
 import {
@@ -37,18 +39,16 @@ class Login extends Component {
     this.state = {
       isLoading: true,
       TextInput_Email: '',
-      TextInput_Password:''
-
+      TextInput_Password: '',
     };
   }
   Validate = () => {
-
     this.showLoader();
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    const { TextInput_Email, TextInput_Password } = this.state;
+    const {TextInput_Email, TextInput_Password} = this.state;
 
-    if (TextInput_Email == '' || reg.test(TextInput_Email)=== false) {
+    if (TextInput_Email == '' || reg.test(TextInput_Email) === false) {
       alert('Email is Not Correct');
       this.hideLoader();
       return false;
@@ -57,11 +57,9 @@ class Login extends Component {
       this.hideLoader();
       return false;
     } else {
-      this.props.navigation.navigate('Home'); 
+      this.props.navigation.navigate('Home');
     }
   };
-
-
 
   performTimeConsumingTask = async () => {
     return new Promise(resolve =>
@@ -85,68 +83,91 @@ class Login extends Component {
     }
 
     return (
-      <View style={styles.Container}>
+      <KeyboardAvoidingView style={styles.containerView} behavior="padding">
         <StatusBar
           backgroundColor="#ffffff"
-          barStyle="dark-content"></StatusBar>
-
-          <Card style={{height:500,width:'100%',}}>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Image source={SplashIcon} style={styles.loginIcon} />
-          <Text style={styles.logoText}>Login</Text>
-        </View>
-
-        <View>
-          <Text style={styles.heading}>Email*</Text>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={TextInputValue =>
-                this.setState({TextInput_Email: TextInputValue})
-              }
-            />
-          </View>
-        </View>
-
-        <View>
-          <Text style={styles.heading}>Password*</Text>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={TextInputValue =>
-                this.setState({TextInput_Password: TextInputValue})
-              }
-            />
-          </View>
-        </View>
-
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 20,
-          }}>
-            <Card style= {styles.cardButton}>
-            <TouchableHighlight
-              style={{width: '100%', alignItems: 'center'}}
-              underlayColor="#2094D0"
-              onPress={() =>  this.props.navigation.navigate('Home')}>
-              <View>
-                <Text style={{color: 'white'}}> SIGN ME IN </Text>
+          barStyle="dark-content"
+          ></StatusBar>
+        <TouchableWithoutFeedback>
+          <View style={styles.loginScreenContainer}>
+            <View style={styles.loginFormView}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: 10,
+                }}>
+                <Image source={SplashIcon} style={styles.loginIcon} />
               </View>
-            </TouchableHighlight>
 
+              <TextInput
+                placeholder="Username or Email Address"
+                placeholderColor="#c4c3cb"
+                style={styles.loginFormTextInput}
+              />
+              <TextInput
+                placeholder="Password"
+                placeholderColor="#c4c3cb"
+                style={styles.loginFormTextInput}
+                secureTextEntry={true}
+              />
 
+<<<<<<< HEAD
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: 20,
+                }}>
+                <Card style={styles.cardButton}>
+                  <TouchableHighlight
+                    style={{width: '100%', alignItems: 'center'}}
+                    underlayColor="#2094D0"
+                    onPress={() => this.props.navigation.navigate('Home')}>
+                    <View>
+                      <Text style={{color: 'white'}}> SIGN ME IN </Text>
+                    </View>
+                  </TouchableHighlight>
+                </Card>
+                <View
+                  style={{
+                    width: '80%',
+                    height: 1,
+                    backgroundColor: '#e2e2e2',
+                    marginTop: 25,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  alignItems: 'center',
+                  marginTop: 5,
+                  justifyContent: 'center',
+                }}>
+                <Text style={{fontSize: 18, color: '#909497'}}>
+                  Forget Password? Click here.
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+=======
             
             </Card>
         </View>
+        <TouchableHighlight onPress={() =>  this.props.navigation.navigate('ForgetPassword')} >
         <View style={{alignItems:'center',marginTop:30,justifyContent:'center'}}> 
         <Text style={styles.forgetText}>Forget Password? Click here.</Text>
         </View>
+
+        </TouchableHighlight>
+     
        
           </Card>
        
       </View>
+>>>>>>> ce125c2a26bbea4a29bc4f92350b6b0f00ffdfa1
     );
   }
 }
@@ -170,17 +191,13 @@ class SplashScreen extends React.Component {
         <StatusBar
           backgroundColor="#ffffff"
           barStyle="dark-content"></StatusBar>
-        
-        <View style={{alignItems:'center' , justifyContent:'center' , flex:4}}>
 
-        <Image source={SplashIcon}  />
+        <View style={{alignItems: 'center', justifyContent: 'center', flex: 4}}>
+          <Image source={SplashIcon} />
         </View>
 
-       
-
         <View style={{marginTop: 50, flex: 1}}>
-          <PulseIndicator
-          color="#57B846"></PulseIndicator>
+          <PulseIndicator color="#57B846"></PulseIndicator>
         </View>
       </View>
     );
@@ -204,8 +221,8 @@ const styles = StyleSheet.create({
   },
 
   loginIcon: {
-    width: 120,
-    height: 120,
+    width: 150,
+    height: 150,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -217,10 +234,8 @@ const styles = StyleSheet.create({
   forgetText: {
     color: 'green',
     fontSize: 20,
-    fontStyle:'italic',
+    fontStyle: 'italic',
     textDecorationLine: 'none',
-    
-  
   },
   heading: {
     color: '#34495E',
@@ -229,14 +244,41 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 20,
   },
-  textInput: {
-    width: '90%',
-    height: 40,
-    borderColor: '#566573',
+  containerView: {
+    flex: 1,
+  },
+  loginScreenContainer: {
+    flex: 1,
+  },
+  logoText: {
+    fontSize: 40,
+    fontWeight: '800',
+    marginTop: 150,
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  loginFormView: {
+    flex: 1,
+    marginTop: 100,
+  },
+  loginFormTextInput: {
+    height: 43,
+    fontSize: 14,
+    borderRadius: 5,
     borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'black',
+    borderColor: '#eaeaea',
+    backgroundColor: '#fafafa',
+    paddingLeft: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  loginButton: {
+    backgroundColor: '#3897f1',
+    borderRadius: 5,
+    height: 55,
+    marginTop: 10,
   },
   cardButton: {
     width: '90%',
@@ -269,7 +311,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const AppNavigator = createStackNavigator({
   Login: {
     screen: Login,
@@ -283,6 +324,15 @@ const AppNavigator = createStackNavigator({
       headerShown: false,
     },
   },
+<<<<<<< HEAD
+=======
+  ForgetPassword: {
+    screen: ForgetPasswordScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
 
+>>>>>>> ce125c2a26bbea4a29bc4f92350b6b0f00ffdfa1
 });
 export default createAppContainer(AppNavigator);
