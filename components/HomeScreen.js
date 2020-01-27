@@ -31,6 +31,10 @@ import Screen1 from '../components/ComplaintsScreen.js';
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
 import {Icon} from 'react-native-vector-icons';
+import totalComplaintsIcon from '../assets/icons/document.png';
+import resolvedComplaintsIcon from '../assets/icons/checklist.png';
+import pendingComplaintsIcon from '../assets/icons/homework.png';
+import inProgressComplaintIcon from '../assets/icons/plan.png';
 
 global.currentScreenIndex = 0;
 //Navigation Drawer Structure for all screen
@@ -87,23 +91,30 @@ class HomeScreen extends Component {
           <View
             style={{
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
               flex: 1,
-              flexDirection: 'column',
+              flexDirection: 'row',
               backgroundColor: '#00B5B8',
             }}>
-            <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
-              0
-            </Text>
-            <Text
-              style={{
-                fontSize: 24,
-                color: 'white',
-                fontStyle: 'normal',
-                fontWeight: 'bold',
-              }}>
-              TOTAL Complaints
-            </Text>
+            <View
+              style={{flex: 0.5, marginLeft: 15, justifyContent: 'flex-start'}}>
+              <Image
+                source={totalComplaintsIcon}
+                style={{width: 100, height: 100}}></Image>
+            </View>
+            <View style={{marginLeft: 70}}>
+              <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
+                0
+              </Text>
+              <Text
+                style={{
+                  fontSize: 22,
+                  color: 'white',
+                  fontStyle: 'normal',
+                }}>
+                Total Complaints
+              </Text>
+            </View>
           </View>
         </Card>
         <Card style={styles.bigCards}>
@@ -112,21 +123,27 @@ class HomeScreen extends Component {
               alignItems: 'center',
               justifyContent: 'center',
               flex: 1,
-              flexDirection: 'column',
+              flexDirection: 'row',
               backgroundColor: '#3CB371',
             }}>
-            <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
-              0
-            </Text>
-            <Text
-              style={{
-                fontSize: 24,
-                color: 'white',
-                fontStyle: 'normal',
-                fontWeight: 'bold',
-              }}>
-              Resolved Complaints
-            </Text>
+            <View>
+              <Image
+                source={resolvedComplaintsIcon}
+                style={{width: 100, height: 100}}></Image>
+            </View>
+            <View style={{marginLeft: 15}}>
+              <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
+                0
+              </Text>
+              <Text
+                style={{
+                  fontSize: 22,
+                  color: 'white',
+                  fontStyle: 'normal',
+                }}>
+                Resolved Complaints
+              </Text>
+            </View>
           </View>
         </Card>
         <View
@@ -141,21 +158,28 @@ class HomeScreen extends Component {
               style={{
                 backgroundColor: '#F4A460',
                 flex: 1,
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
-                flexDirection: 'column',
+                flexDirection: 'row',
               }}>
-              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
-                0
-              </Text>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-                Pending Complaints
-              </Text>
+              <View style={{marginLeft: 5}}>
+                <Image
+                  source={pendingComplaintsIcon}
+                  style={{width: 50, height: 50}}></Image>
+              </View>
+              <View style={{marginLeft: 5}}>
+                <Text
+                  style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
+                  0
+                </Text>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 12,
+                  }}>
+                  Pending Complaints
+                </Text>
+              </View>
             </View>
           </Card>
           <Card
@@ -164,21 +188,30 @@ class HomeScreen extends Component {
               style={{
                 backgroundColor: '#F08080',
                 flex: 1,
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
-                flexDirection: 'column',
+                flexDirection: 'row',
               }}>
-              <Text style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
-                0
-              </Text>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 16,
-                  fontFamily: 'sans-serif',
-                }}>
-                In-Progress Complaints
-              </Text>
+              <View>
+                <Image
+                  source={inProgressComplaintIcon}
+                  style={{height:50, width:50}}>
+                  
+                  </Image>
+              </View>
+              <View style={{marginLeft:5}}>
+                <Text
+                  style={{color: 'white', fontSize: 28, fontWeight: 'bold'}}>
+                  0
+                </Text>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 12,
+                  }}>
+                  InProgress Complaints
+                </Text>
+              </View>
             </View>
           </Card>
         </View>
@@ -197,14 +230,19 @@ class HomeScreen extends Component {
               style={{width: '100%', alignItems: 'center'}}
               underlayColor="#2094D0"
               onPress={() => this.props.navigation.navigate('complaintsType')}>
-              <View style={{ flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row'}}>
                 <Image
                   source={launchComplainIcon}
-                  style={{width: 25, height: 25,marginRight:20, tintColor: 'white'}}
+                  style={{
+                    width: 25,
+                    height: 25,
+                    marginRight: 20,
+                    tintColor: 'white',
+                  }}
                 />
                 <Text
                   style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-                 Launch Complain
+                  Launch Complain
                 </Text>
               </View>
             </TouchableHighlight>
@@ -319,8 +357,7 @@ const styles = StyleSheet.create({
   cardButton: {
     width: '90%',
     height: 50,
-
-    backgroundColor: 'green',
+    backgroundColor: '#6ECF68',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'black',
@@ -343,8 +380,7 @@ const AppNavigator = createStackNavigator({
     screen: complaintsTypeScreen,
     navigationOptions: {
       headerShown: false,
-}
-   
+    },
   },
 });
 export default createAppContainer(AppNavigator);

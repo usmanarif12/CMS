@@ -30,6 +30,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 class ComplaintTypes extends Component {
 
+  
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -41,7 +42,7 @@ class ComplaintTypes extends Component {
 
           
           <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
-            <TouchableHighlight  onPress={() =>navigate('createComplaint', "Agriculture")}>
+            <TouchableHighlight  onPress={() =>navigate('createComplaint', "Agriculture Complaint")}>
 
             <Card style={{ height: 150, width: 150, marginRight: 20 }}>
               
@@ -50,60 +51,80 @@ class ComplaintTypes extends Component {
                 <Text>Agriculture</Text>
               </View>
             </Card>
-          </TouchableHighlight>
+          </TouchableHighlight >
             
+            <TouchableHighlight onPress={() =>navigate('createComplaint', "Banking Complaint")}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={bankicon}></Image>
                 <Text>Banking</Text>
               </View>
             </Card>
+            </TouchableHighlight>
+          
           </View>
           
-
-          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
+              
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+            
+            <TouchableHighlight onPress={() =>navigate('createComplaint', "Communication Complaint")}>
             <Card style={{height:150 , width:150, marginRight:20 }}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={communicationicon}></Image>
                 <Text>Communication</Text>
               </View>
             </Card>
+            </TouchableHighlight>
+            
+            <TouchableHighlight onPress={() =>navigate('createComplaint', "Developement Complaint")}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={developmenticon}></Image>
                 <Text>Developement</Text>
               </View>
             </Card>
+            </TouchableHighlight>
           </View>
           
-          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+            <TouchableHighlight onPress={() =>navigate('createComplaint', "Diasaster Complaint")}>
             <Card style={{height:150 , width:150, marginRight:20 }}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={disastericon}></Image>
                 <Text>Diasaster</Text>
               </View>
             </Card>
+            </TouchableHighlight>
+            
+            <TouchableHighlight onPress={() =>navigate('createComplaint', "Education Complaint")}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={educationicon}></Image>
                 <Text>Education</Text>
               </View>
             </Card>
+            </TouchableHighlight>
+           
           </View>
           
-          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+            <TouchableHighlight  onPress={() =>navigate('createComplaint', "Forest Complaint")}>
             <Card style={{height:150 , width:150, marginRight:20 }}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={foresticon}></Image>
                 <Text>Forest</Text>
               </View>
             </Card>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() =>navigate('createComplaint', "Energy Complaint")}>
             <Card style={{height:150 , width:150}}>
               <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Image style={{height:100,width:100}} resizeMode="center" source={energyicon}></Image>
                 <Text>Energy</Text>
               </View>
             </Card>
+            </TouchableHighlight>
+            
               </View>
         </View>
       </ScrollView>

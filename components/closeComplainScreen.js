@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, Picker, TextInput, Image} from 'react-native';
-import { TouchableHighlight, ScrollView } from 'react-native-gesture-handler';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 import { Card } from 'react-native-shadow-cards';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
 
-export default class CreateComplaintScreen extends Component {
+export default class CloseComplaint extends Component {
   constructor(props) {
     super(props);
     this.State = {
@@ -16,7 +16,6 @@ export default class CreateComplaintScreen extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <ScrollView>
         <View
           style={{
             flexDirection: 'row',
@@ -102,15 +101,12 @@ export default class CreateComplaintScreen extends Component {
               width: 70,
               padding: 5,
               fontWeight: 'bold',
-              marginTop: 25,
-              marginLeft: 35,
+              marginTop: 30,
+              marginLeft: 30,
             }}>
             Title:
           </Text>
-          <Card style={{  marginTop:20 , width:240 , height:45}}>
-          <TextInput  style={{fontSize:16}}></TextInput>
-          </Card>
-         
+         <TextInput style={{borderColor:'green' , marginTop:30 ,borderWidth:1, borderRadius:3 , width:250 , height:40}}></TextInput>
         </View>
         <View
           style={{
@@ -128,17 +124,14 @@ export default class CreateComplaintScreen extends Component {
               alignItems: 'center',
               color: 'black',
               width: 100,
-             
+              padding: 5,
               fontWeight: 'bold',
               marginTop: 30,
-              marginLeft: 10,
+              marginLeft: 30,
             }}>
             Description:
           </Text>
-          <Card style={{ marginTop:20 , width:240 , height:60}}>
-          <TextInput multiline={true} numberOfLines={6} style={{fontSize:16}} ></TextInput>
-          </Card>
-         
+         <TextInput multiline={true} numberOfLines={6} style={{borderColor:'green' , marginTop:30 ,borderWidth:1, borderRadius:3 , width:220 , height:40}}></TextInput>
         </View>
         <View
           style={{
@@ -157,17 +150,24 @@ export default class CreateComplaintScreen extends Component {
                     </TouchableHighlight>
                 </Card>
             </View>
-        
+            <View
+          style={{
+            width: '100%',
+            height: 1,
+            backgroundColor: '#e2e2e2',
+            marginTop: 10,
+          }}
+            />
             
         <View
           style={{
             flex: 3,
-            
+            justifyContent: 'flex-end',
                     height: 50,
-            marginTop:110,
+            marginTop:240,
             width: '100%',
             alignItems: 'center',
-            marginBottom: 30,
+            marginBottom: 20,
           }}>
           <Card style={styles.cardButton}>
             <TouchableHighlight
@@ -181,13 +181,12 @@ export default class CreateComplaintScreen extends Component {
                 />
                 <Text
                   style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-                 Create Complaint
+                 Create Complain
                 </Text>
               </View>
             </TouchableHighlight>
           </Card>
         </View>
-       </ScrollView>
       </View>
     );
   }
@@ -200,9 +199,8 @@ const styles = StyleSheet.create({
     cardButton: {
         width: '90%',
         height: 50,
-      
-        
-        backgroundColor: '#6ECF68',
+    marginTop:60,
+        backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'black',
