@@ -1,50 +1,90 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text,TouchableWithoutFeedback } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text,TouchableHighlight, Button} from 'react-native';
 import Constants from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
 import ViewComplaintsScreen from '../components/ViewComplaints.js';
-import { TouchableHighlight } from 'react-native-gesture-handler';
-const DATA = [
-  {
-    id: '1',
-    title: 'My AC is out of Freon',
-    description : 'I need a person to repair my AC ASAP. '
-  },
-  {
-    id: '2',
-    title: 'Electricity Problem',
-    description : 'I need an Electrician to solve my electric related Problems'
-  },
- 
-];
+import {  } from 'react-native-gesture-handler';
 
-function Item({ title }) {
-  return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-   
-    </View>
-  );
-}
+
 class TotalComplaintsList extends Component{
     render (){
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={({ item }) => <TouchableHighlight onPress={() => this.props.navigation.navigate('ViewComplaintsScreen')}> 
+    <View style={styles.container}
+    >
+      <View style={{flexDirection:'row' ,marginTop:20, justifyContent:'flex-end' , marginRight:20}}>
+
+         <Button title="Test"/>
+      </View>
+
+      <View
+          style={{
+            width: '100%',
+            height: 1,
+            backgroundColor: '#e2e2e2',
+            marginTop: 10,
+          }}
+            />
+
+                
+<View style={{flexDirection: 'row'}}>
+          <Text
+            style={{
+              fontSize: 20,
+              alignItems: 'center',
+              color: 'black',
+              width: 100,
+              padding: 5,
+              fontWeight: 'bold',
+              marginTop: 10,
+              marginLeft: 30,
+            }}>
+            Date|
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 20,
+              alignItems: 'center',
+              color: 'black',
+              width: 100,
+              padding: 5,
+              fontWeight: 'bold',
+              marginTop: 10,
+              marginLeft: 30,
+            }}>
+            Title|
+          </Text>
         
-        <Item title={item.title}   />
-        </TouchableHighlight>
+           
+        </View>
+
+
+  <TouchableHighlight onPress={() => this.props.navigation.navigate('ViewComplaintsScreen')}>
+
         
-        
-       
-     }
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
-  );
+<View style={styles.item}>
+  
+  <Text style={styles.title}>My AC is out of Freon</Text>
+    <Text style={styles.description}>I need a person to repair my AC ASAP</Text> 
+
+ 
+    
+    </View>
+      </TouchableHighlight>
+
+
+
+     
+
+
+  
+ 
+    </View>
+
+  )
+   
+  
 }
 }
 
@@ -61,8 +101,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+    fontWeight: 'bold',
     
   },
+  description:{
+    fontSize: 19,
+
+
+  }
 });
 
 const AppNavigator = createStackNavigator({
@@ -79,6 +125,13 @@ ViewComplaintsScreen: {
   }
      
     },
+      ViewComplaintsScreen: {
+    screen: ViewComplaintsScreen,
+    navigationOptions: {
+      headerShown: false,
+}
+   
+  },
   
   });
   export default createAppContainer(AppNavigator);

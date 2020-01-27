@@ -85,7 +85,7 @@ class HomeScreen extends Component {
       <View style={styles.mainnContainer}>
         <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
 
-        <TouchableHighlight  style={styles.bigCards} onPress={() => this.props.navigation.navigate('ViewComplaintsScreen')} >
+        <TouchableHighlight  style={styles.bigCards} onPress={() => this.props.navigation.navigate('TotalComplaintsList')} >
         <Card style={styles.bigCards}  >
           <View
             style={{
