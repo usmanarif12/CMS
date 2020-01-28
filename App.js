@@ -138,16 +138,21 @@ class Login extends Component {
                   }}
                 />
               </View>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate('ForgetPassword')}>
+
+              
               <View
                 style={{
                   alignItems: 'center',
                   marginTop: 5,
                   justifyContent: 'center',
                 }}>
+                  
                 <Text style={{fontSize: 18, color: '#909497'}}>
                   Forget Password? Click here.
                 </Text>
               </View>
+              </TouchableHighlight>
             </View>
           </View>
         </TouchableWithoutFeedback>
