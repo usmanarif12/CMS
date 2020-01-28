@@ -36,7 +36,6 @@ export default class ForgetPasswordScreen extends Component {
           backgroundColor="#ffffff"
           barStyle="dark-content"></StatusBar>
 
-          <Card style={{height:400,width:'100%',}}>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Image source={forgetPassIcon} style={styles.loginIcon} />
           <Text style={styles.logoText}>Forget Password</Text>
@@ -50,12 +49,11 @@ export default class ForgetPasswordScreen extends Component {
         <View>
           <Text style={styles.heading}>Email*</Text>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={TextInputValue =>
-                this.setState({TextInput_Email: TextInputValue})
-              }
-            />
+          <TextInput
+                placeholder="Username or Email Address"
+                placeholderColor="#c4c3cb"
+                style={styles.loginFormTextInput}
+              />
           </View>
         </View>
 
@@ -83,7 +81,7 @@ export default class ForgetPasswordScreen extends Component {
         </View>
         
        
-          </Card>
+    
        
       </View>
     );
@@ -91,10 +89,8 @@ export default class ForgetPasswordScreen extends Component {
 }
 const styles = StyleSheet.create({
     Container: {
-      justifyContent: 'center',
-      alignContent: 'center',
-      flex: 2,
-      width:"100%",
+flex:1,
+marginTop: 100,
     
     },
  
@@ -103,7 +99,20 @@ const styles = StyleSheet.create({
       alignContent: 'center',
       marginTop: 50,
     },
-  
+    loginFormTextInput: {
+      height: 43,
+      fontSize: 14,
+      width:"90%",
+      borderRadius: 5,
+      borderWidth: 1,
+      borderColor: '#eaeaea',
+      backgroundColor: '#fafafa',
+      paddingLeft: 10,
+      marginLeft: 15,
+      marginRight: 15,
+      marginTop: 5,
+      marginBottom: 5,
+    },
     loginIcon: {
       width: 120,
       height: 120,
