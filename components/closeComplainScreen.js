@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, Picker, TextInput, Image} from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { Card } from 'react-native-shadow-cards';
+import crossIcon from '../assets/icons/crossIcon.jpg';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
 
 export default class CloseComplaint extends Component {
@@ -16,177 +18,150 @@ export default class CloseComplaint extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <View
+                <View
           style={{
-            flexDirection: 'row',
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 30,
-          }}>
-          <Text style={{fontSize: 26, color: 'gray', fontWeight: 'bold'}}>
-            Agriculture Complaints
-          </Text>
-        </View>
+            width: '100%',
+            height: 1,
+            backgroundColor: '#e2e2e2',
+            marginTop:10
+           
+          }}
+            />
+   
+        
+        
+                
+<View style={{flexDirection: 'row',}}>
+          <Text
+            style={{
+              fontSize: 20,
+              alignItems: 'center',
+              color: 'black',
+              width: 80,
 
-        <View style={{flexDirection: 'row'}}>
-          <Text
-            style={{
-              fontSize: 20,
-              alignItems: 'center',
-              color: 'black',
-              width: 100,
-              padding: 5,
               fontWeight: 'bold',
-              marginTop: 30,
-              marginLeft: 30,
+              marginTop: 15,
+              marginLeft: 20,
             }}>
-            Nature:
+          Status 
           </Text>
+          <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' }}>
+
+          </View>
+
           <Picker
-            style={{marginLeft: 10, width: 200, marginTop: 25}}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({status: itemValue})
-            }>
-            <Picker.Item label="Not Defined" value="Not Defined" />
-            <Picker.Item label="Resolved" value="resolved" />
-          </Picker>
+              style={{ width: 200,marginLeft:10}}
+              onValueChange={(itemValue, itemIndex) =>
+                this.setState({status: itemValue})
+              }>
+              <Picker.Item label="Cancel" value="Not Defined" />
+              <Picker.Item label="Resolved" value="resolved" />
+            </Picker>
+
+
+        
+           
         </View>
         <View
           style={{
             width: '100%',
             height: 1,
             backgroundColor: '#e2e2e2',
-            marginTop: 10,
+            marginTop:0
+           
           }}
             />
-            
-            <View style={{flexDirection: 'row'}}>
-          <Text
+
+<View style={{flexDirection: 'row'}}>
+            <Text
+              style={{
+                fontSize: 20,
+                alignItems: 'center',
+                color: 'black',
+                width: 85,
+
+                fontWeight: 'bold',
+                marginTop: 50,
+                marginLeft: 20,
+              }}>
+              Description
+            </Text>
+            <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' }}>
+
+</View>
+            <Card style={{marginTop: 20,marginLeft:20, width: 240, height:100}}>
+              <TextInput
+                placeholder="Description Of Complaint"
+                multiline={true}
+                numberOfLines={6}
+                style={{fontSize: 16}}></TextInput>
+            </Card>
+          </View>
+          
+          <View
             style={{
-              fontSize: 20,
-              alignItems: 'center',
-              color: 'black',
-              width: 100,
-              padding: 5,
-              fontWeight: 'bold',
-              marginTop: 30,
-              marginLeft: 30,
-            }}>
-            Nature Type:
-          </Text>
-          <Picker
-            style={{marginLeft: 10, width: 200, marginTop: 25}}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({status: itemValue})
-            }>
-            <Picker.Item label="Not Defined" value="Not Defined" />
-            <Picker.Item label="Resolved" value="resolved" />
-          </Picker>
-        </View>
-        <View
-          style={{
-            width: '100%',
-            height: 1,
-            backgroundColor: '#e2e2e2',
-            marginTop: 10,
-          }}
-            />
-             <View style={{flexDirection: 'row'}}>
-          <Text
+              width: '100%',
+              height: 1,
+              backgroundColor: '#e2e2e2',
+              marginTop: 10,
+            }}
+          />
+ 
+ <Rating
+  showRating='true'
+
+  ratingColor='#3498db'
+  ratingBackgroundColor='#c8c7c8'
+  ratingCount={5}
+  imageSize={30}
+  
+  style={{ marginTop:5}}
+/>
+   <View style={{justifyContent:'center',alignItems:'center'}}>
+   <Card style={{marginTop: 10, width: 350, height:130 , alignItems:'center'}}>
+              <TextInput
+                placeholder="Reviews "
+                multiline={true}
+                numberOfLines={6}
+                style={{fontSize: 16}}></TextInput>
+            </Card>
+
+   </View>
+        
+   <View
             style={{
-              fontSize: 20,
-              alignItems: 'center',
-              color: 'black',
-              width: 70,
-              padding: 5,
-              fontWeight: 'bold',
-              marginTop: 30,
-              marginLeft: 30,
-            }}>
-            Title:
-          </Text>
-         <TextInput style={{borderColor:'green' , marginTop:30 ,borderWidth:1, borderRadius:3 , width:250 , height:40}}></TextInput>
-        </View>
-        <View
-          style={{
-            width: '100%',
-            height: 1,
-            backgroundColor: '#e2e2e2',
-            marginTop: 10,
-          }}
-            />
-            
-            <View style={{flexDirection: 'row'}}>
-          <Text
-            style={{
-              fontSize: 20,
-              alignItems: 'center',
-              color: 'black',
-              width: 100,
-              padding: 5,
-              fontWeight: 'bold',
-              marginTop: 30,
-              marginLeft: 30,
-            }}>
-            Description:
-          </Text>
-         <TextInput multiline={true} numberOfLines={6} style={{borderColor:'green' , marginTop:30 ,borderWidth:1, borderRadius:3 , width:220 , height:40}}></TextInput>
-        </View>
-        <View
-          style={{
-            width: '100%',
-            height: 1,
-            backgroundColor: '#e2e2e2',
-            marginTop: 10,
-          }}
-            />
-            <View style={{flexDirection:'row' , flex:1, justifyContent:'center', alignContent:'center', marginTop:15}}>
-              
-               
-                <Card style={{ width: 150, height: 40, justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableHighlight>
-                        <Text>CHOOSE IMAGE</Text>
-                    </TouchableHighlight>
-                </Card>
-            </View>
-            <View
-          style={{
-            width: '100%',
-            height: 1,
-            backgroundColor: '#e2e2e2',
-            marginTop: 10,
-          }}
-            />
-            
-        <View
-          style={{
-            flex: 3,
-            justifyContent: 'flex-end',
-                    height: 50,
-            marginTop:240,
-            width: '100%',
-            alignItems: 'center',
-            marginBottom: 20,
-          }}>
-          <Card style={styles.cardButton}>
+              width: '100%',
+              height: 1,
+              backgroundColor: '#e2e2e2',
+              marginTop: 13,
+            }}
+          />
+  
+
+   <Card style={styles.cardButton}>
             <TouchableHighlight
               style={{width: '100%', alignItems: 'center'}}
               underlayColor="#2094D0"
-              onPress={() => this.props.navigation.navigate('')}>
-              <View style={{ flexDirection: 'row'}}>
-                <Image
+            >
+              <View style={{flexDirection: 'row'}}>
+                
+              <Image
                   source={launchComplainIcon}
-                  style={{width: 25, height: 25,marginRight:20, tintColor: 'white'}}
+                  style={{
+                    width: 25,
+                    height: 25,
+                    marginRight: 20,
+                    tintColor: 'white',
+                  }}
                 />
                 <Text
                   style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-                 Create Complain
+                 Close Complaint
                 </Text>
               </View>
             </TouchableHighlight>
           </Card>
-        </View>
+        
       </View>
     );
   }
@@ -194,15 +169,16 @@ export default class CloseComplaint extends Component {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flexDirection:'column'
+        flex:1
     },
-    cardButton: {
+  
+      cardButton: {
         width: '90%',
         height: 50,
-    marginTop:60,
-        backgroundColor: 'green',
+        backgroundColor: '#6ECF68',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'black',
+        margin:20
       },
 });

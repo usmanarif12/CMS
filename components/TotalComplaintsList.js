@@ -5,6 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
 import ViewComplaintsScreen from '../components/ViewComplaints.js';
 import {  } from 'react-native-gesture-handler';
+import {Card} from 'react-native-shadow-cards';
 
 
 class TotalComplaintsList extends Component{
@@ -217,15 +218,19 @@ class TotalComplaintsList extends Component{
           <View style={{flexDirection:'column', marginLeft:25}}>
             <Text style={styles.title}>My home has been damaged</Text>
           <Text style={styles.description}>I need a person to repair my    damaged home ASAP</Text> 
+        <View style={{justifyContent:'center'}}>
+
+        </View>
 
           </View>
          
  
     
     </View>
+
+        
       </TouchableHighlight>
-
-
+   
 
       <View
           style={{
@@ -345,6 +350,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     
+  },
+  cardButton: {
+    width: '20%',
+    height: 25,
+    backgroundColor: '#6ECF68',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'black',
+    margin:20
   },
   description:{
     fontSize: 19,
