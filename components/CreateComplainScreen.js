@@ -185,13 +185,13 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
                 width: 100,
                 padding: 5,
                 fontWeight: 'bold',
-                marginTop: 30,
+                marginTop: 25,
                 marginLeft: 30,
               }}>
               Nature:
             </Text>
             <Picker
-              style={{marginLeft: 10, width: 200, marginTop: 25}}
+              style={{marginLeft: 10, width: 200, marginTop: 20}}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({status: itemValue})
               }>
@@ -217,13 +217,13 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
                 width: 100,
                 padding: 5,
                 fontWeight: 'bold',
-                marginTop: 30,
+                marginTop: 20,
                 marginLeft: 30,
               }}>
               Nature Type:
             </Text>
             <Picker
-              style={{marginLeft: 10, width: 200, marginTop: 25}}
+              style={{marginLeft: 10, width: 200, marginTop: 15}}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({status: itemValue})
               }>
@@ -248,13 +248,13 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
                 width: 70,
                 padding: 5,
                 fontWeight: 'bold',
-                marginTop: 25,
+                marginTop: 20,
                 marginLeft: 35,
               }}>
               Title:
             </Text>
             <Card style={{marginTop: 20, width: 240, height: 45}}>
-              <TextInput style={{fontSize: 16}} placeholder="Title Of Complaint"></TextInput>
+              <TextInput style={{fontSize: 16,paddingLeft:10}} placeholder="Title Of Complaint"></TextInput>
             </Card>
           </View>
           <View
@@ -285,7 +285,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
                 placeholder="Description Of Complaint"
                 multiline={true}
                 numberOfLines={6}
-                style={{fontSize: 16}}></TextInput>
+                style={{fontSize: 16, paddingLeft:10}}></TextInput>
             </Card>
           </View>
           <View
