@@ -1,6 +1,7 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
 import React, {Component} from 'react';
 import ViewComplaintsScreen from '../components/ViewComplaints.js';
+import CloseComplaint from '../components/closeComplainScreen.js';
 //import react in our code.
 import {
   View,
@@ -252,11 +253,12 @@ class HomeScreen extends Component {
                 />
                 <Text
                   style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-                  Launch Complain
+                  Launch Complaint
                 </Text>
               </View>
             </TouchableHighlight>
           </Card>
+          
         </View>
       </View>
     );
@@ -371,6 +373,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     color: 'black',
+    margin:20
   },
   actionButtonIcon: {
     fontSize: 20,
@@ -413,5 +416,21 @@ const AppNavigator = createStackNavigator({
 }
    
   },
+
+  CloseComplaint: {
+    screen: CloseComplaint ,
+    navigationOptions : {
+      title: 'Close Complaint',
+      headerStyle: {
+        backgroundColor: 'green',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }
+   
+  },
+
 });
 export default createAppContainer(AppNavigator);
