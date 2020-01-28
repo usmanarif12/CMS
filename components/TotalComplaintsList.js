@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text,TouchableHighlight, Button} from 'react-native';
 import Constants from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
-import {createAppContainer} from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+
 import ViewComplaintsScreen from '../components/ViewComplaints.js';
 import {  } from 'react-native-gesture-handler';
 import {Card} from 'react-native-shadow-cards';
@@ -58,7 +59,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
               
@@ -72,7 +73,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
               
@@ -86,7 +87,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
               
@@ -115,7 +116,7 @@ class TotalComplaintsList extends Component{
         
 <View style={styles.item}>
           <View style={{justifyContent:'center' , alignItems:'center'}} >
-            <Text style={{fontSize:28 , fontWeight:'bold' }}>#1</Text>
+            <Text style={{fontSize:28 , fontWeight:'bold',color:'#57595d' }}>#1</Text>
           </View>
           <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' , marginLeft:15}}>
 
@@ -146,10 +147,10 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+             
               width: 100,
               padding: 5,
-              
+              color: '#a9a9a9',
               marginTop: 10,
               marginLeft: 20,
             }}>
@@ -160,7 +161,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
               
@@ -174,7 +175,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
               
@@ -210,7 +211,7 @@ class TotalComplaintsList extends Component{
         
 <View style={styles.item}>
 <View style={{justifyContent:'center' , alignItems:'center'}} >
-            <Text style={{fontSize:28 , fontWeight:'bold' }}>#2</Text>
+            <Text style={{fontSize:28 , fontWeight:'bold',color:'#57595d' }}>#2</Text>
           </View>
           <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' , marginLeft:15}}>
 
@@ -247,7 +248,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
             
@@ -261,7 +262,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
               
@@ -275,7 +276,7 @@ class TotalComplaintsList extends Component{
             style={{
               fontSize: 16,
               alignItems: 'center',
-              color: 'black',
+              color: '#a9a9a9',
               width: 100,
               padding: 5,
               
@@ -303,7 +304,7 @@ class TotalComplaintsList extends Component{
         
 <View style={styles.item}>
 <View style={{justifyContent:'center' , alignItems:'center'}} >
-            <Text style={{fontSize:28 , fontWeight:'bold' }}>#3</Text>
+            <Text style={{fontSize:28 , fontWeight:'bold',color:'#57595d' }}>#3</Text>
           </View>
           <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' , marginLeft:15}}/>
 
@@ -349,7 +350,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    
+    color:'#57595d'
   },
   cardButton: {
     width: '20%',
@@ -362,6 +363,7 @@ const styles = StyleSheet.create({
   },
   description:{
     fontSize: 19,
+    color:'#57595d'
 
 
   }

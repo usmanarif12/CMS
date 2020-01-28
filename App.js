@@ -15,7 +15,8 @@ import {
 } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import {Card} from 'react-native-shadow-cards';
+import { Card } from 'react-native-shadow-cards';
+
 import HomeScreen from './components/HomeScreen';
 import ForgetPasswordScreen from './components/ForgetPasswordScreen';
 
