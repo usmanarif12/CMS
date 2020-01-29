@@ -10,10 +10,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import micIcon from '../assets/icons/radio.png'
 import sendIcon from '../assets/icons/send.png'
-
+import CloseComplaint from '../components/closeComplainScreen.js';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 // import all basic components
 
- export default class ViewComplaints extends Component {
+ class ViewComplaints extends Component {
   //Screen1 Component
   render() {
     
@@ -29,8 +31,8 @@ import sendIcon from '../assets/icons/send.png'
              <Text style={{ fontSize: 16, marginBottom: 5 ,color:'#57595d'}}>27/01/2020</Text>
               <Card backgroundColor="green" style={{ width: 70, height: 40 }}>
                 <View style={{justifyContent:'center' , alignItems:'center', flex:1}}>
-                <TouchableOpacity >
-                  <Text style={{color:'white'}}>View</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('CloseComplaint')}>
+                  <Text style={{color:'white'}}>Close</Text>
                 </TouchableOpacity>
               </View>
                
@@ -121,6 +123,12 @@ import sendIcon from '../assets/icons/send.png'
                 <Text style={{marginLeft:20 , fontSize:16}}>Hi there..</Text>
                 <Text style={{marginLeft:150, fontSize:12, color:'#A6ACAF'}}>8:02 PM</Text>
               </View>
+              <View style={{justifyContent:'flex-end',borderRadius:4,height:40,justifyContent:'center', marginTop:10, marginLeft:10, width:200 , backgroundColor:'white'}}> 
+                <Text style={{marginLeft:20 , fontSize:16}}>Hi there..</Text>
+                <Text style={{marginLeft:150, fontSize:12, color:'#A6ACAF'}}>8:02 PM</Text>
+              </View>
+              
+              
               
               <View style={{justifyContent:'flex-end',justifyContent:'center', marginTop:10}}> 
                
@@ -130,7 +138,9 @@ import sendIcon from '../assets/icons/send.png'
              
            
             </View>
-            <View style = {{ flex:1}}>
+            <View style={{justifyContent:'flex-end' , alignContent:'flex-end'}}>
+
+            <View style = {{ flex:1 ,}}>
                 <View style={{ flexDirection: 'row' }}>
                   
                   <TextInput
@@ -150,6 +160,8 @@ import sendIcon from '../assets/icons/send.png'
                  
                  </View>
               </View>
+            </View>
+        
           </View>
         
       </View>
@@ -228,3 +240,29 @@ const styles = StyleSheet.create({
 
 });
 
+const AppNavigator = createStackNavigator({
+  ViewComplaints: {
+    screen: ViewComplaints,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+
+
+  CloseComplaint: {
+    screen: CloseComplaint ,
+    navigationOptions : {
+      title: 'Close Complaint',
+      headerStyle: {
+        backgroundColor: 'green',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }
+   
+  },
+
+});
+export default createAppContainer(AppNavigator);

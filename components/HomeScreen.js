@@ -27,11 +27,12 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
 //Import all the screens
-import Screen1 from '../components/ComplaintsScreen.js';
+import Screen1 from '../components/ComplaintTypesScreen.js';
 
 //Import Custom Sidebar
 import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
 import TotalComplaintsList from '../components/TotalComplaintsList.js';
+import Screen2 from './TotalComplaintsList.js';
 import {Icon} from 'react-native-vector-icons';
 import totalComplaintsIcon from '../assets/icons/document.png';
 import resolvedComplaintsIcon from '../assets/icons/checklist.png';
@@ -286,17 +287,11 @@ const FirstActivity_StackNavigator = createStackNavigator({
 const Screen2_StackNavigator = createStackNavigator({
   //All the screen from the Second Option will be indexed here
   Second: {
-    screen: Screen1,
-    navigationOptions: ({navigation}) => ({
-      title: 'Complaints',
-      headerLeft: () => <MenuIcon navigationProps={navigation} />,
-      
-
-      headerStyle: {
-        backgroundColor: 'green',
-      },
-      headerTintColor: '#fff',
-    }),
+    screen: Screen1, 
+    navigationOptions:{
+      headerShown:false
+    }
+  
   },
 });
 
@@ -304,17 +299,11 @@ const Screen2_StackNavigator = createStackNavigator({
 const Screen3_StackNavigator = createStackNavigator({
   //All the screen from the Third Option will be indexed here
   Third: {
-    screen: Screen1,
-    navigationOptions: ({navigation}) => ({
-      title: 'Demo Screen 3',
-      headerLeft: () => <MenuIcon navigationProps={navigation} />,
-      
-
-      headerStyle: {
-        backgroundColor: 'green',
-      },
-      headerTintColor: '#fff',
-    }),
+    screen: Screen2,
+    navigationOptions:{
+      headerShown:false
+    }
+  
   },
 });
 

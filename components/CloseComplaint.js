@@ -7,13 +7,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
 
 export default class CloseComplaint extends Component {
-  constructor(props) {
-    super(props);
-    this.State = {
-        status: 'cancel',
-        filePath: {},
-    };
-    }
+  
    
   render() {
     return (
