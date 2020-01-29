@@ -385,16 +385,7 @@ const AppNavigator = createStackNavigator({
   },
   TotalComplaintsList: {
     screen: TotalComplaintsList,
-    navigationOptions : {
-      title: 'Complaints List',
-      headerStyle: {
-        backgroundColor: 'green',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }
+    
    
   },
   ViewComplaintsScreen: {

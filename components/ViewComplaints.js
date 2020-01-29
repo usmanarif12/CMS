@@ -4,13 +4,13 @@ import React, { Component } from 'react';
 //import react in our code.
 import { StyleSheet, View, Text, Button, TextInput, TouchableHighlight,TouchableOpacity,KeyboardAvoidingView  , Image} from 'react-native';
 import { Card } from 'react-native-shadow-cards';
-import {createAppContainer} from 'react-navigation';
 
-import {createStackNavigator} from 'react-navigation-stack';
+
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import micIcon from '../assets/icons/radio.png'
 import sendIcon from '../assets/icons/send.png'
-import CloseComplaint from '../components/closeComplainScreen.js';
+import CloseComplaint from '../components/CloseComplaint.js';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 // import all basic components
@@ -123,10 +123,7 @@ import {createStackNavigator} from 'react-navigation-stack';
                 <Text style={{marginLeft:20 , fontSize:16}}>Hi there..</Text>
                 <Text style={{marginLeft:150, fontSize:12, color:'#A6ACAF'}}>8:02 PM</Text>
               </View>
-              <View style={{justifyContent:'flex-end',borderRadius:4,height:40,justifyContent:'center', marginTop:10, marginLeft:10, width:200 , backgroundColor:'white'}}> 
-                <Text style={{marginLeft:20 , fontSize:16}}>Hi there..</Text>
-                <Text style={{marginLeft:150, fontSize:12, color:'#A6ACAF'}}>8:02 PM</Text>
-              </View>
+              
               
               
               
@@ -243,9 +240,18 @@ const styles = StyleSheet.create({
 const AppNavigator = createStackNavigator({
   ViewComplaints: {
     screen: ViewComplaints,
-    navigationOptions: {
-      headerShown: false,
-    },
+    navigationOptions : {
+      title: 'Complaints Detail',
+      headerStyle: {
+        backgroundColor: 'green',
+        
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        marginLeft:10
+      },
+    }
   },
 
 

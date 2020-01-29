@@ -169,7 +169,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               flex: 1,
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: 30,
+              marginTop: 10,
             }}>
             <Text style={{fontSize: 26, color: 'gray', fontWeight: 'bold'}}>
               {complaintType}
@@ -179,7 +179,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
           <View style={{flexDirection: 'row'}}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 16,
                 alignItems: 'center',
                 color: 'black',
                 width: 100,

@@ -358,15 +358,22 @@ const styles = StyleSheet.create({
 const AppNavigator = createStackNavigator({
   TotalComplaintsList: {
     screen: TotalComplaintsList,
-    navigationOptions: {
-      headerShown: false,
-    },
+    navigationOptions : {
+      title: 'Complaints List',
+      headerStyle: {
+        backgroundColor: 'green',
+        
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        marginLeft:10
+      },
+    }
   },
   ViewComplaintsScreen: {
     screen: ViewComplaintsScreen,
-    navigationOptions: {
-      headerShown: false,
-    },
+ 
   },
 });
 export default createAppContainer(AppNavigator);

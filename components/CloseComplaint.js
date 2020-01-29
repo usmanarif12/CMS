@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, Picker, TextInput, Image} from 'react-native';
+import {Text, View, StyleSheet, Picker, TextInput, Image, ScrollView} from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { Card } from 'react-native-shadow-cards';
 import crossIcon from '../assets/icons/crossIcon.jpg';
@@ -11,7 +11,8 @@ export default class CloseComplaint extends Component {
    
   render() {
     return (
-      <View style={styles.mainContainer}>
+      <ScrollView>
+        <View style={styles.mainContainer}>
                 <View
           style={{
             width: '100%',
@@ -31,7 +32,7 @@ export default class CloseComplaint extends Component {
               fontSize: 20,
               alignItems: 'center',
               color: 'black',
-              width: 80,
+              width: 85,
 
               fontWeight: 'bold',
               marginTop: 15,
@@ -72,18 +73,18 @@ export default class CloseComplaint extends Component {
                 fontSize: 20,
                 alignItems: 'center',
                 color: 'black',
-                width: 85,
+                width: 95,
 
                 fontWeight: 'bold',
                 marginTop: 50,
-                marginLeft: 20,
+                marginLeft: 10,
               }}>
               Description
             </Text>
             <View style={{width:1 , height:'100%' , backgroundColor:'#e2e2e2' }}>
 
 </View>
-            <Card style={{marginTop: 20,marginLeft:20, width: 240, height:100}}>
+            <Card style={{marginTop: 10, marginLeft:10,marginBottom:10, width: 240, height:100}}>
               <TextInput
                 placeholder="Description Of Complaint"
                 multiline={true}
@@ -97,7 +98,7 @@ export default class CloseComplaint extends Component {
               width: '100%',
               height: 1,
               backgroundColor: '#e2e2e2',
-              marginTop: 10,
+              
             }}
           />
  
@@ -157,13 +158,16 @@ export default class CloseComplaint extends Component {
           </Card>
         
       </View>
+        </ScrollView>
+      
     );
   }
 }
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex:1
+    flex: 1,
+      backgroundColor:'white'
     },
   
       cardButton: {
