@@ -44,23 +44,68 @@ class Login extends Component {
     };
   }
   Validate = () => {
-    this.showLoader();
+
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     const {TextInput_Email, TextInput_Password} = this.state;
 
-    if (TextInput_Email == '' || reg.test(TextInput_Email) === false) {
+    if (TextInput_Email == '' ) {
       alert('Email is Not Correct');
-      this.hideLoader();
+   
       return false;
     } else if (TextInput_Password == '') {
       alert('Please enter Password');
-      this.hideLoader();
+
       return false;
     } else {
-      this.props.navigation.navigate('Home');
+      this.LoginFunction();
+      
     }
   };
+
+  LoginFunction = () => {
+  
+
+    const {TextInput_Email} = this.state;
+    const {TextInput_Password} = this.state;
+    
+
+
+     fetch('http://bsmartcms.com/cp/api/auth/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": TextInput_Email,
+
+        "password": TextInput_Password,
+      }),
+    })
+      .then(response => response.json())
+      .then(responseData => {
+
+        console.log(responseData);
+      if (responseData.message == "true") {
+        
+     
+
+this.props.navigation.navigate('Home' )
+
+      }
+      else {
+        alert("Account does not exits")
+
+      }
+      
+      })
+      .catch(error => {
+      alert("Error occured , Try Again")
+      });
+  };
+
+
 
   performTimeConsumingTask = async () => {
     return new Promise(resolve =>
@@ -105,12 +150,16 @@ class Login extends Component {
                 placeholder="Username or Email Address"
                 placeholderColor="#c4c3cb"
                 style={styles.loginFormTextInput}
+                onChangeText={TextInputValue =>
+                  this.setState({TextInput_Email: TextInputValue})}
               />
               <TextInput
                 placeholder="Password"
                 placeholderColor="#c4c3cb"
                 style={styles.loginFormTextInput}
                 secureTextEntry={true}
+                onChangeText={TextInputValue =>
+                  this.setState({TextInput_Password: TextInputValue})}
               />
 
               <View
@@ -123,7 +172,7 @@ class Login extends Component {
                   <TouchableHighlight
                     style={{width: '100%', alignItems: 'center'}}
                     underlayColor="#2094D0"
-                    onPress={() => this.props.navigation.navigate('Home')}>
+                    onPress={() => this.Validate()}>
                     <View>
                       <Text style={{color: 'white'}}> SIGN ME IN </Text>
                     </View>
