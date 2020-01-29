@@ -176,12 +176,12 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
             </Text>
           </View>
 
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', justifyContent:'center' , alignItems:'center'}}>
             <Text
               style={{
                 fontSize: 16,
                 alignItems: 'center',
-                color: 'black',
+                color: '#57595d',
                 width: 100,
                 padding: 5,
                 fontWeight: 'bold',
@@ -204,16 +204,16 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               width: '100%',
               height: 1,
               backgroundColor: '#e2e2e2',
-              marginTop: 10,
+              marginTop: 5,
             }}
           />
 
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', justifyContent:'center' , alignItems:'center'}}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 16,
                 alignItems: 'center',
-                color: 'black',
+                color: '#57595d',
                 width: 100,
                 padding: 5,
                 fontWeight: 'bold',
@@ -236,15 +236,15 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               width: '100%',
               height: 1,
               backgroundColor: '#e2e2e2',
-              marginTop: 10,
+              marginTop: 5,
             }}
           />
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 16,
                 alignItems: 'center',
-                color: 'black',
+                color: '#57595d',
                 width: 70,
                 padding: 5,
                 fontWeight: 'bold',
@@ -253,8 +253,8 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               }}>
               Title:
             </Text>
-            <Card style={{marginTop: 20, width: 240, height: 45}}>
-              <TextInput style={{fontSize: 16,paddingLeft:10}} placeholder="Title Of Complaint"></TextInput>
+            <Card style={{marginTop: 20, width: 240, height: 40}}>
+              <TextInput style={{fontSize: 14,paddingLeft:10}} placeholder="Title Of Complaint"></TextInput>
             </Card>
           </View>
           <View
@@ -266,12 +266,12 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
             }}
           />
 
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 16,
                 alignItems: 'center',
-                color: 'black',
+                color: '#57595d',
                 width: 100,
 
                 fontWeight: 'bold',
@@ -280,12 +280,12 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               }}>
               Description:
             </Text>
-            <Card style={{marginTop: 20, width: 240, height: 60}}>
+            <Card style={{marginTop: 20, width: 240, height: 40}}>
               <TextInput
                 placeholder="Description Of Complaint"
                 multiline={true}
                 numberOfLines={6}
-                style={{fontSize: 16, paddingLeft:10}}></TextInput>
+                style={{fontSize: 14, paddingLeft:10}}></TextInput>
             </Card>
           </View>
           <View
@@ -296,19 +296,12 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               marginTop: 10,
             }}
           />
-          <View
-            style={{
-              flexDirection: 'column',
-              flex: 1,
-              justifyContent: 'center',
-              alignContent: 'center',
-              marginTop: 15,
-            }}>
+          <View style={{ flexDirection: 'row',flex: 1,justifyContent: 'center',marginTop: 15,}}>
             
-            <View style={styles.ImageSections}>
-              <View style={{justifyContent:'center', alignItems:'center'}}>
-                <Text style={{fontSize:12 , marginBottom:10, fontWeight:'bold'}}>Select Image Related to Complaint from Gallery Or Camera</Text>
-                <Image source={dummy} style= {styles.images}></Image>
+            <View style={{justifyContent:'center' , flex:1, marginLeft:20}}>
+              <View style={{flexDirection:'column'}} >
+                <Text style={{fontSize:14 , marginBottom:10, color: '#57595d'}}>Select Image Related to Complaint from Gallery Or Camera</Text>
+                
                 <Card
               style={{
                 width: 150,
@@ -323,7 +316,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
             </Card>
               </View>
             </View>
-           
+            <Image source={dummy} style= {styles.images}></Image>
           </View>
           <View
             style={{
@@ -379,24 +372,24 @@ const styles = StyleSheet.create({
   cardButton: {
     width: '90%',
     height: 50,
-
     backgroundColor: '#6ECF68',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'black',
   },
   ImageSections: {
-    display: 'flex',
+    
     flexDirection: 'row',
     paddingHorizontal: 8,
     paddingVertical: 8,
-    justifyContent: 'center'
+    
   },
   images: {
     width: 150,
     height: 150,
     borderColor: 'black',
     borderWidth: 1,
-    marginHorizontal: 3
+    marginHorizontal: 3,
+    marginRight:10
   },
 });
