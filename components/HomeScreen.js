@@ -1,7 +1,7 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
 import React, {Component} from 'react';
 import ViewComplaintsScreen from '../components/ViewComplaints.js';
-import CloseComplaint from '../components/closeComplainScreen.js';
+import CloseComplaint from '../components/CloseComplaint.js';
 //import react in our code.
 import {
   View,
@@ -273,8 +273,7 @@ const FirstActivity_StackNavigator = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Dashboard',
       headerLeft: () => <MenuIcon navigationProps={navigation} />,
-      headerRight: () => <LaunchComplainIcon />,
-
+     
       headerStyle: {
         backgroundColor: 'green',
       },
@@ -291,7 +290,7 @@ const Screen2_StackNavigator = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Complaints',
       headerLeft: () => <MenuIcon navigationProps={navigation} />,
-      headerRight: () => <LaunchComplainIcon />,
+      
 
       headerStyle: {
         backgroundColor: 'green',
@@ -309,7 +308,7 @@ const Screen3_StackNavigator = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Demo Screen 3',
       headerLeft: () => <MenuIcon navigationProps={navigation} />,
-      headerRight: () => <LaunchComplainIcon />,
+      
 
       headerStyle: {
         backgroundColor: 'green',

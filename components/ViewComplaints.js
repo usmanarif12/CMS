@@ -4,15 +4,19 @@ import React, { Component } from 'react';
 //import react in our code.
 import { StyleSheet, View, Text, Button, TextInput, TouchableHighlight,TouchableOpacity,KeyboardAvoidingView  , Image} from 'react-native';
 import { Card } from 'react-native-shadow-cards';
-import { } from 'react-native-gesture-handler';
+import {createAppContainer} from 'react-navigation';
+
+import {createStackNavigator} from 'react-navigation-stack';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import micIcon from '../assets/icons/radio.png'
 import sendIcon from '../assets/icons/send.png'
+
 // import all basic components
 
-export default class ViewComplaints extends Component {
+ export default class ViewComplaints extends Component {
   //Screen1 Component
   render() {
+    
     return (
       <KeyboardAwareScrollView>
          <View style={styles.MainContainer}>
@@ -223,3 +227,4 @@ const styles = StyleSheet.create({
   },
 
 });
+
