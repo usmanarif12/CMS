@@ -13,6 +13,7 @@ import {
   Text,
   StatusBar,
   TouchableHighlight,
+  FlatList,
   Alert,
 } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
@@ -46,6 +47,8 @@ class MenuIcon extends Component {
   toggleDrawer = () => {
     this.props.navigationProps.toggleDrawer();
   };
+
+
 
   render() {
     return (
@@ -90,6 +93,10 @@ class HomeScreen extends Component {
     return (
       <View style={styles.mainnContainer}>
         <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
+
+        <View style={styles.container}>
+    
+      </View>
 
         <TouchableHighlight  style={styles.bigCards} onPress={() => this.props.navigation.navigate('TotalComplaintsList')} >
         <Card style={styles.bigCards}  >

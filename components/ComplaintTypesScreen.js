@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -8,12 +8,13 @@ import {
   Button,
   StatusBar,
   TextInput,
+  FlatList,
   Alert,
   TouchableHighlight,
   TouchableWithoutFeedback
 } from 'react-native';
-import {Card} from 'react-native-shadow-cards';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import { Card } from 'react-native-shadow-cards';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import agricultureicon from '../assets/icons/agriculture.png';
 import bankicon from '../assets/icons/bank.png';
 import communicationicon from '../assets/icons/communication.png';
@@ -25,108 +26,85 @@ import foresticon from '../assets/icons/forest.png';
 import createComplaint from './CreateComplainScreen.js';
 import LaunchComplain from '../components/LaunchComplain.js'
 
-import {createAppContainer} from 'react-navigation';
-import {createDrawerNavigator} from 'react-navigation-drawer';
-import {createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from 'react-navigation-stack';
 
 class ComplaintTypes extends Component {
 
-  
+  constructor() {
+
+    super();
+    this.state = {
+
+      dataSource: []
+    }
+
+  }
+
+
+  componentDidMount() {
+
+    fetch('http://bsmartcms.com/cp/api/natures').then(response => response.json()).then(responseData => {
+
+
+      this.setState({
+
+
+        dataSource: responseData
+      })
+
+    })
+  }
+
+  renderItem = ({ item }) => (
+
+
+    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+      <TouchableHighlight onPress={() => this.props.navigation.navigate('createComplaint') } >
+
+        <Card style={{ height: 180, width: 180, marginRight: 20 }}>
+
+          <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Image style={{ height: 120, width: 120 }} source={{uri:item.image}}></Image>
+            <Text>{item.name}</Text>
+          </View>
+        </Card>
+      </TouchableHighlight >
+
+
+    </View>
+
+
+  );
   render() {
-    const { navigate } = this.props.navigation;
+    
     return (
+
+
+
       <ScrollView>
         <View style={styles.Container}>
           <StatusBar
             backgroundColor="green"
             barStyle="light-content"></StatusBar>
 
-          
-          <View style={{ flex: 1, flexDirection: 'row' , justifyContent:'center' , alignItems:'center' , marginTop:20}}>
-            <TouchableHighlight  onPress={() =>navigate('createComplaint', {complaintType:'Agriculture Complaint'})}>
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={this.renderItem}
+            horizontal={false}
+            numColumns={2}
 
-            <Card style={{ height: 150, width: 150, marginRight: 20 }}>
-              
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={agricultureicon}></Image>
-                <Text>Agriculture</Text>
-              </View>
-            </Card>
-          </TouchableHighlight >
-            
-            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Banking Complaint'})}>
-            <Card style={{height:150 , width:150}}>
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={bankicon}></Image>
-                <Text>Banking</Text>
-              </View>
-            </Card>
-            </TouchableHighlight>
-          
-          </View>
-          
-              
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-            
-            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Communication Complaint'})}>
-            <Card style={{height:150 , width:150, marginRight:20 }}>
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={communicationicon}></Image>
-                <Text>Communication</Text>
-              </View>
-            </Card>
-            </TouchableHighlight>
-            
-            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Developement Complaint'})}>
-            <Card style={{height:150 , width:150}}>
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={developmenticon}></Image>
-                <Text>Developement</Text>
-              </View>
-            </Card>
-            </TouchableHighlight>
-          </View>
-          
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Diasaster Complaint'})}>
-            <Card style={{height:150 , width:150, marginRight:20 }}>
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={disastericon}></Image>
-                <Text>Diasaster</Text>
-              </View>
-            </Card>
-            </TouchableHighlight>
-            
-            <TouchableHighlight onPress={() =>navigate('createComplaint',{complaintType:'Education Complaint'})}>
-            <Card style={{height:150 , width:150}}>
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={educationicon}></Image>
-                <Text>Education</Text>
-              </View>
-            </Card>
-            </TouchableHighlight>
-           
-          </View>
-          
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-            <TouchableHighlight  onPress={() =>navigate('createComplaint', {complaintType:'Forest Complaint'})}>
-            <Card style={{height:150 , width:150, marginRight:20 }}>
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={foresticon}></Image>
-                <Text>Forest</Text>
-              </View>
-            </Card>
-            </TouchableHighlight>
-            <TouchableHighlight onPress={() =>navigate('createComplaint', {complaintType:'Energy Complaint'})}>
-            <Card style={{height:150 , width:150}}>
-              <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{height:100,width:100}} resizeMode="center" source={energyicon}></Image>
-                <Text>Energy</Text>
-              </View>
-            </Card>
-            </TouchableHighlight>
-            
-              </View>
+            keyExtractor={(item, index) => index
+            }
+          />
+
+
+
+
+
+
+
         </View>
       </ScrollView>
     );
@@ -144,14 +122,14 @@ const styles = StyleSheet.create({
     height: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    resizeMode:'center'
+    resizeMode: 'center'
   },
 });
 const AppNavigator = createStackNavigator({
-  
+
   complaintsType: {
     screen: ComplaintTypes,
-    navigationOptions: ({navigation}) => ({
+    navigationOptions: ({ navigation }) => ({
       title: 'Complaints Type',
       headerStyle: {
         backgroundColor: 'green',
@@ -161,14 +139,14 @@ const AppNavigator = createStackNavigator({
   },
   createComplaint: {
     screen: createComplaint,
-    navigationOptions: ({navigation}) => ({
+    navigationOptions: ({ navigation }) => ({
       title: 'Create your Complaint',
       headerStyle: {
         backgroundColor: 'green',
       },
       headerTintColor: '#fff',
     }),
- 
+
   },
-  });
-  export default createAppContainer(AppNavigator);
+});
+export default createAppContainer(AppNavigator);
