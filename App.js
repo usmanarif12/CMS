@@ -399,10 +399,15 @@ const RootStack = createStackNavigator({
 const AuthStack = createStackNavigator({
   Login: {
     screen: Login,
-    navigationOption
+    navigationOptions: {
+      headerShown: false,
+    },
   },
   ForgetPassword: {
-    screen: ForgetPasswordScreen
+    screen: ForgetPasswordScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
   }
 });
 export default createAppContainer(createSwitchNavigator(
