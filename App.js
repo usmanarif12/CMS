@@ -398,7 +398,8 @@ const RootStack = createStackNavigator({
 });
 const AuthStack = createStackNavigator({
   Login: {
-    screen: Login
+    screen: Login,
+    navigationOption
   },
   ForgetPassword: {
     screen: ForgetPasswordScreen
