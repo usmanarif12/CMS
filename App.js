@@ -12,14 +12,20 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
+  AsyncStorage
 } from 'react-native';
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import { Card } from 'react-native-shadow-cards';
-
+import {Card} from 'react-native-shadow-cards';
+import DialogProgress from 'react-native-dialog-progress';
 import HomeScreen from './components/HomeScreen';
 import ForgetPasswordScreen from './components/ForgetPasswordScreen';
 
+const options = {
+  title:"Loading.....",
+  message:"Please Wait",
+  isCancelable:false
+}
 import SplashIcon from './assets/icons/logo.png';
 import {
   BallIndicator,
@@ -43,69 +49,67 @@ class Login extends Component {
       TextInput_Password: '',
     };
   }
-  Validate = () => {
-
+  Validate = async() => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     const {TextInput_Email, TextInput_Password} = this.state;
 
-    if (TextInput_Email == '' ) {
+    if (TextInput_Email == '') {
       alert('Email is Not Correct');
-   
+
       return false;
     } else if (TextInput_Password == '') {
       alert('Please enter Password');
 
       return false;
     } else {
-      this.LoginFunction();
-      
+      this._loginFunction();
     }
   };
 
-  LoginFunction = () => {
-  
-
+  _loginFunction = async() => {
+    DialogProgress.show(options);
     const {TextInput_Email} = this.state;
     const {TextInput_Password} = this.state;
-    
 
-
-     fetch('http://bsmartcms.com/cp/api/auth/login', {
+    let response = await fetch('http://bsmartcms.com/cp/api/auth/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        "email": TextInput_Email,
+        email: TextInput_Email,
 
-        "password": TextInput_Password,
+        password: TextInput_Password,
       }),
-    })
-      .then(response => response.json())
-      .then(responseData => {
-
-        console.log(responseData);
-      if (responseData.message == "true") {
-        
-     
-
-this.props.navigation.navigate('Home' )
-
-      }
-      else {
-        alert("Account does not exits")
-
-      }
-      
-      })
-      .catch(error => {
-      alert("Error occured , Try Again")
-      });
+    });
+    let responseJson = await response.json();
+    console.log(responseJson);
+       
+    if (responseJson.message === "true") {
+      DialogProgress.hide();
+      await AsyncStorage.setItem('isLoggedIn', '1');
+      this.props.navigation.navigate('Home');
+    }
+    else {
+      alert('Invalid Email or Password');
+    }
+      // .then(  response => response.json())
+      // .then(responseData => {
+      //   console.log(responseData);
+      //   if (responseData.message == 'true') {
+      //     DialogProgress.hide();
+      //     await AsyncStorage.setItem('isLoggedIn', '1');
+      //     this.props.navigation.navigate('Home');
+      //   } else {
+      //     alert('Account does not exits');
+      //   }
+      // })
+      // .catch(error => {
+      //   alert('Error occured , Try Again');
+      // });
   };
-
-
 
   performTimeConsumingTask = async () => {
     return new Promise(resolve =>
@@ -132,8 +136,7 @@ this.props.navigation.navigate('Home' )
       <KeyboardAvoidingView style={styles.containerView} behavior="padding">
         <StatusBar
           backgroundColor="#ffffff"
-          barStyle="dark-content"
-          ></StatusBar>
+          barStyle="dark-content"></StatusBar>
         <TouchableWithoutFeedback>
           <View style={styles.loginScreenContainer}>
             <View style={styles.loginFormView}>
@@ -151,7 +154,8 @@ this.props.navigation.navigate('Home' )
                 placeholderColor="#c4c3cb"
                 style={styles.loginFormTextInput}
                 onChangeText={TextInputValue =>
-                  this.setState({TextInput_Email: TextInputValue})}
+                  this.setState({TextInput_Email: TextInputValue})
+                }
               />
               <TextInput
                 placeholder="Password"
@@ -159,7 +163,8 @@ this.props.navigation.navigate('Home' )
                 style={styles.loginFormTextInput}
                 secureTextEntry={true}
                 onChangeText={TextInputValue =>
-                  this.setState({TextInput_Password: TextInputValue})}
+                  this.setState({TextInput_Password: TextInputValue})
+                }
               />
 
               <View
@@ -187,20 +192,20 @@ this.props.navigation.navigate('Home' )
                   }}
                 />
               </View>
-              <TouchableHighlight onPress={() => this.props.navigation.navigate('ForgetPassword')}>
-
-              
-              <View
-                style={{
-                  alignItems: 'center',
-                  marginTop: 5,
-                  justifyContent: 'center',
-                }}>
-                  
-                <Text style={{fontSize: 18, color: '#909497'}}>
-                  Forget Password? Click here.
-                </Text>
-              </View>
+              <TouchableHighlight
+                onPress={() =>
+                  this.props.navigation.navigate('ForgetPassword')
+                }>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    marginTop: 5,
+                    justifyContent: 'center',
+                  }}>
+                  <Text style={{fontSize: 18, color: '#909497'}}>
+                    Forget Password? Click here.
+                  </Text>
+                </View>
               </TouchableHighlight>
             </View>
           </View>
@@ -239,6 +244,27 @@ class SplashScreen extends React.Component {
         </View>
       </View>
     );
+  }
+}
+class AuthScreenLoading extends React.Component{
+
+  constructor(props) {
+    super(props)
+    this._loadData();
+
+
+  }
+  render(){
+    return (
+      <View>
+        <ActivityIndicator />
+        
+      </View>
+    )
+  }
+  _loadData = async () => {
+    const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+    this.props.navigation.navigate(isLoggedIn !== '1' ? 'Auth' : 'App')
   }
 }
 const styles = StyleSheet.create({
@@ -349,25 +375,45 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppNavigator = createStackNavigator({
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
+
+const RootStack = createStackNavigator({
+  // Login: {
+  //   screen: Login,
+  //   navigationOptions: {
+  //     headerShown: false,
+  //   },
+  // },
   Home: {
     screen: HomeScreen,
     navigationOptions: {
       headerShown: false,
     },
   },
-  ForgetPassword: {
-    screen: ForgetPasswordScreen,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-
+  // ForgetPassword: {
+  //   screen: ForgetPasswordScreen,
+  //   navigationOptions: {
+  //     headerShown: false,
+  //   },
+  // },
 });
-export default createAppContainer(AppNavigator);
+const AuthStack = createStackNavigator({
+  Login: {
+    screen: Login
+  },
+  ForgetPassword: {
+    screen: ForgetPasswordScreen
+  }
+});
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthLoading: AuthScreenLoading,
+    App: RootStack,
+    Auth: AuthStack
+
+
+  },
+  {
+      initialRouteName:'AuthLoading'
+  }
+)
+);
