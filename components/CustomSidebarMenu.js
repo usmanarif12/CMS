@@ -1,18 +1,21 @@
 //This is an example code for Navigation Drawer with Custom Side bar//
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, AsyncStorage } from 'react-native';
 import { Icon } from 'react-native-elements';
-
+import AwesomeAlert from 'react-native-awesome-alerts';
 import profileIcon from '../assets/icons/profileicon.jpg';
 export default class CustomSidebarMenu extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     //Setting up the Main Top Large Image of the Custom Sidebar
     this.proileImage =
       'https://aboutreact.com/wp-content/uploads/2018/07/sample_img.png';
     //Array of the sidebar navigation option with icon and screen to navigate
     //This screens can be any screen defined in Drawer Navigator in App.js
     //You can find the Icons from here https://material.io/tools/icons/
+
+    this.state = { showAlert: false };
+
     this.items = [
       {
         navOptionThumb: 'dashboard',
@@ -56,7 +59,24 @@ export default class CustomSidebarMenu extends Component {
           },
     ];
   }
+ showAlert = () => {
+    this.setState({
+      showAlert: true
+    });
+  };
+ 
+  hideAlert = () => {
+    this.setState({
+      showAlert: false
+    });
+  };
+  _logoutUser = async () => {
+    
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  }
   render() {
+    const {showAlert} = this.state;
     return (
         <View style={styles.sideMenuContainer}>
             
@@ -97,13 +117,40 @@ export default class CustomSidebarMenu extends Component {
                 }}
                 onPress={() => {
                   global.currentScreenIndex = key;
-                  this.props.navigation.navigate(item.screenToNavigate);
+                  if (item.navOptionName === 'Logout') {
+                    this.showAlert();
+                  }
+                  else {
+                    this.props.navigation.navigate(item.screenToNavigate);
+                  }
+                  
+                  
+                  
                 }}>
                 {item.navOptionName}
               </Text>
             </View>
           ))}
         </View>
+        <AwesomeAlert
+          show={showAlert}
+          showProgress={false}
+          title="Logout?"
+          message="Are You Sure You Want to Logout?"
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
+          showCancelButton={true}
+          showConfirmButton={true}
+          cancelText="No, cancel"
+          confirmText="Yes, Logout"
+          confirmButtonColor="#DD6B55"
+          onCancelPressed={() => {
+            this.hideAlert();
+          }}
+          onConfirmPressed={() => {
+            this._logoutUser();
+          }}
+        />
       </View>
     );
   }

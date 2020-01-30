@@ -361,7 +361,7 @@ const AppNavigator = createStackNavigator({
     navigationOptions : {
       title: 'Complaints List',
       headerStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
         
       },
       headerTintColor: '#fff',
@@ -373,7 +373,9 @@ const AppNavigator = createStackNavigator({
   },
   ViewComplaintsScreen: {
     screen: ViewComplaintsScreen,
- 
+    navigationOptions: {
+    headerShown:false
+  }
   },
 });
 export default createAppContainer(AppNavigator);

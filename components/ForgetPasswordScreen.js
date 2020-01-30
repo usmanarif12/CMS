@@ -11,6 +11,7 @@ import {
   TextInput,
   Alert,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 
 import { Card } from 'react-native-shadow-cards';
@@ -31,7 +32,8 @@ export default class ForgetPasswordScreen extends Component {
   render() {
 
     return (
-      <View style={styles.Container}>
+      <ScrollView>
+        <View style={styles.Container}>
         <StatusBar
           backgroundColor="#ffffff"
           barStyle="dark-content"></StatusBar>
@@ -47,10 +49,10 @@ export default class ForgetPasswordScreen extends Component {
        
 
         <View>
-          <Text style={styles.heading}>Email*</Text>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          
+          <View style={{justifyContent: 'center', alignItems: 'center', marginTop:20}}>
           <TextInput
-                placeholder="Username or Email Address"
+                placeholder="Email Address"
                 placeholderColor="#c4c3cb"
                 style={styles.loginFormTextInput}
               />
@@ -84,6 +86,7 @@ export default class ForgetPasswordScreen extends Component {
     
        
       </View>
+      </ScrollView>
     );
   }
 }
@@ -121,12 +124,12 @@ marginTop: 100,
       marginTop:20
     },
     logoText: {
-      color: 'green',
+      color: '#2E8B57',
       fontSize: 24,
       fontWeight: 'bold',
     },
     text: {
-        color: 'black',
+        color: '#a2a2a2',
         fontSize: 17,
        
       },
@@ -150,7 +153,7 @@ marginTop: 100,
     cardButton: {
         width: '90%',
         height: 40,
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'black',
