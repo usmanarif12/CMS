@@ -14,6 +14,7 @@ import {Card} from 'react-native-shadow-cards';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
 import dummy from '../assets/icons/dummy.png';
 import ImagePicker from 'react-native-image-picker';
+import axios from 'axios'
 
 const options = {
   title: 'Select Avatar',
@@ -28,6 +29,7 @@ export default class CreateComplaintScreen extends Component {
   constructor(props) {
     super(props);
     this.State = {
+      dataSource: [],
       status: 'cancel',
       filepath: {
         data: '',
@@ -35,6 +37,7 @@ export default class CreateComplaintScreen extends Component {
       },
       fileData: '',
       fileUri: '',
+  
     };
   }
 
@@ -144,6 +147,47 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
     }
   }
 
+  componentDidMount() {
+    const {navigation} = this.props;
+    const natureId = navigation.getParam('natureId', 'NO-User');
+   
+
+  {
+     alert(natureId)
+    }
+
+    
+    fetch('http://bsmartcms.com/cp/api/nature-types/' + natureId).then(response => response.json()).then(responseData => {
+
+
+      this.setState({
+
+
+        dataSource: responseData
+      })
+      console.log(this.state.dataSource)
+
+    })
+
+  //  axios.get('http://bsmartcms.com/cp/api/nature-types/' + natureId) .then(function (response) {
+  //   let data =response.data;
+    
+  
+  //   this.setState({
+
+
+  //     dataSource: data
+  //   })
+  //   console.log(dataSource)
+  
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
+    
+  }
+
+
   renderFileUri() {
     if (this.state.fileUri) {
       return <Image
@@ -158,8 +202,8 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
     }
   }
   render() {
-    const {navigation} = this.props;
-    const complaintType = navigation.getParam('complaintType', 'NO-User');
+  
+  
     return (
       <View style={styles.mainContainer}>
         <ScrollView>
@@ -172,7 +216,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               marginTop: 10,
             }}>
             <Text style={{fontSize: 26, color: 'gray', fontWeight: 'bold'}}>
-              {complaintType}
+     
             </Text>
           </View>
 
@@ -194,9 +238,16 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               style={{marginLeft: 10, width: 200, marginTop: 20}}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({status: itemValue})
+                
               }>
-              <Picker.Item label="Not Defined" value="Not Defined" />
-              <Picker.Item label="Resolved" value="resolved" />
+ {this.state.dataSource !== [] ? (
+        this.state.dataSource.map(dataSource => {
+            return <Picker.Item label={dataSource.name} value={dataSource.id} />;
+        })
+    ) : (
+        <Picker.Item label="Loading..." value="0" />
+    )}
+          
             </Picker>
           </View>
           <View
