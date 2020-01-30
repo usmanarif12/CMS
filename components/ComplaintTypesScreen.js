@@ -61,7 +61,7 @@ class ComplaintTypes extends Component {
 
 
     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-      <TouchableHighlight onPress={() => this.props.navigation.navigate('createComplaint') } >
+      <TouchableHighlight onPress={() => this.props.navigation.navigate('createComplaint', {item : item.uid})} >
 
         <Card style={{ height: 180, width: 180, marginRight: 20 }}>
 
