@@ -14,7 +14,7 @@ import {
   KeyboardAvoidingView,
   AsyncStorage
 } from 'react-native';
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator, ScrollView} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Card} from 'react-native-shadow-cards';
 import DialogProgress from 'react-native-dialog-progress';
@@ -93,22 +93,10 @@ class Login extends Component {
       this.props.navigation.navigate('Home');
     }
     else {
+      DialogProgress.hide();
       alert('Invalid Email or Password');
     }
-      // .then(  response => response.json())
-      // .then(responseData => {
-      //   console.log(responseData);
-      //   if (responseData.message == 'true') {
-      //     DialogProgress.hide();
-      //     await AsyncStorage.setItem('isLoggedIn', '1');
-      //     this.props.navigation.navigate('Home');
-      //   } else {
-      //     alert('Account does not exits');
-      //   }
-      // })
-      // .catch(error => {
-      //   alert('Error occured , Try Again');
-      // });
+      
   };
 
   performTimeConsumingTask = async () => {
@@ -124,16 +112,18 @@ class Login extends Component {
     const data = await this.performTimeConsumingTask();
 
     if (data !== null) {
-      this.setState({isLoading: false});
+      this.setState({ isLoading: false });
+      await AsyncStorage.setItem('SplashViewed', '1');
     }
   }
   render() {
-    if (this.state.isLoading) {
+    const isSplashViewed = AsyncStorage.getItem('SplashViewed');
+    if (this.state.isLoading && isSplashViewed !== '1') {
       return <SplashScreen />;
     }
 
     return (
-      <KeyboardAvoidingView style={styles.containerView} behavior="padding">
+      <ScrollView style={styles.containerView}>
         <StatusBar
           backgroundColor="#ffffff"
           barStyle="dark-content"></StatusBar>
@@ -210,7 +200,7 @@ class Login extends Component {
             </View>
           </View>
         </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }
@@ -240,7 +230,7 @@ class SplashScreen extends React.Component {
         </View>
 
         <View style={{marginTop: 50, flex: 1}}>
-          <PulseIndicator color="#57B846"></PulseIndicator>
+          <UIActivityIndicator color="#2E8B57"></UIActivityIndicator>
         </View>
       </View>
     );
@@ -272,6 +262,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     flex: 4,
+    backgroundColor:'white'
   },
   BodyContainer: {
     width: '100%',
@@ -313,6 +304,7 @@ const styles = StyleSheet.create({
   },
   loginScreenContainer: {
     flex: 1,
+   
   },
   logoText: {
     fontSize: 40,
@@ -347,7 +339,7 @@ const styles = StyleSheet.create({
   cardButton: {
     width: '90%',
     height: 40,
-    backgroundColor: 'green',
+    backgroundColor: '#2E8B57',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'black',
@@ -400,9 +392,16 @@ const AuthStack = createStackNavigator({
   Login: {
     screen: Login,
 
+    navigationOptions: {
+      headerShown: false,
+    },
+
   },
   ForgetPassword: {
-    screen: ForgetPasswordScreen
+    screen: ForgetPasswordScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
   }
 });
 export default createAppContainer(createSwitchNavigator(

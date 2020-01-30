@@ -29,7 +29,7 @@ import {createStackNavigator} from 'react-navigation-stack';
             <View style={{flexDirection:'column' , margin:20}}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5,color:'#57595d' }}>Date</Text>
              <Text style={{ fontSize: 16, marginBottom: 5 ,color:'#57595d'}}>27/01/2020</Text>
-              <Card backgroundColor="green" style={{ width: 70, height: 40 }}>
+              <Card backgroundColor="#2E8B57" style={{ width: 70, height: 40 }}>
                 <View style={{justifyContent:'center' , alignItems:'center', flex:1}}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('CloseComplaint')}>
                   <Text style={{color:'white'}}>Close</Text>
@@ -94,7 +94,7 @@ import {createStackNavigator} from 'react-navigation-stack';
           </View>
           
           <View style={{flexDirection:'column', flex:5}}>
-            <View style={{width:'100%' ,flex:1, backgroundColor:'green' , height:40 , justifyContent:'center' , alignItems:'center'}}>
+            <View style={{width:'100%' ,flex:1, backgroundColor:'#2E8B57' , height:40 , justifyContent:'center' , alignItems:'center'}}>
                 <Text style={{color:'white', fontWeight:'bold', fontSize:16}}>Chat Head</Text>
             </View>
             <View style={{flexDirection:'column' , backgroundColor:'#ECCCAB', flex:4}}>
@@ -243,7 +243,7 @@ const AppNavigator = createStackNavigator({
     navigationOptions : {
       title: 'Complaints Detail',
       headerStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
         
       },
       headerTintColor: '#fff',
@@ -260,7 +260,7 @@ const AppNavigator = createStackNavigator({
     navigationOptions : {
       title: 'Close Complaint',
       headerStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {

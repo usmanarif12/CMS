@@ -86,7 +86,7 @@ class ComplaintTypes extends Component {
       <ScrollView>
         <View style={styles.Container}>
           <StatusBar
-            backgroundColor="green"
+            backgroundColor="#2E8B57"
             barStyle="light-content"></StatusBar>
 
           <FlatList
@@ -132,7 +132,7 @@ const AppNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Complaints Type',
       headerStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
       },
       headerTintColor: '#fff',
     }),
@@ -142,7 +142,7 @@ const AppNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Create your Complaint',
       headerStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
       },
       headerTintColor: '#fff',
     }),

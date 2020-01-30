@@ -2,6 +2,9 @@
 import React, {Component} from 'react';
 import ViewComplaintsScreen from '../components/ViewComplaints.js';
 import CloseComplaint from '../components/CloseComplaint.js';
+import profileIcon from '../assets/icons/profileicon.jpg';
+import { Icon } from 'react-native-elements';
+import AwesomeAlert from 'react-native-awesome-alerts';
 //import react in our code.
 import {
   View,
@@ -15,6 +18,7 @@ import {
   TouchableHighlight,
   FlatList,
   Alert,
+  AsyncStorage 
 } from 'react-native';
 import {Card} from 'react-native-shadow-cards';
 import complaintsTypeScreen from '../components/ComplaintTypesScreen.js';
@@ -24,23 +28,23 @@ import ActionButton from 'react-native-action-button';
 
 //For React Navigation 4+
 import {createAppContainer} from 'react-navigation';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createDrawerNavigator,DrawerActions} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
 //Import all the screens
 import Screen1 from '../components/ComplaintTypesScreen.js';
 
 //Import Custom Sidebar
-import CustomSidebarMenu from '../components/CustomSidebarMenu.js';
+
 import TotalComplaintsList from '../components/TotalComplaintsList.js';
 import Screen2 from './TotalComplaintsList.js';
-import {Icon} from 'react-native-vector-icons';
+
 import totalComplaintsIcon from '../assets/icons/document.png';
 import resolvedComplaintsIcon from '../assets/icons/checklist.png';
 import pendingComplaintsIcon from '../assets/icons/homework.png';
 import inProgressComplaintIcon from '../assets/icons/plan.png';
 
-global.currentScreenIndex = 0;
+//global.currentScreenIndex = 0;
 //Navigation Drawer Structure for all screen
 
 class MenuIcon extends Component {
@@ -88,11 +92,15 @@ class HomeScreen extends Component {
     //Props to open/close the drawer
     this.props.navigationProps.toggleDrawer();
   };
+  
+ 
 
   render() {
+   
     return (
       <View style={styles.mainnContainer}>
-        <StatusBar backgroundColor="green" barStyle="light-content"></StatusBar>
+        
+        <StatusBar backgroundColor="#2E8B57" barStyle="light-content"></StatusBar>
 
         <View style={styles.container}>
     
@@ -112,7 +120,7 @@ class HomeScreen extends Component {
               style={{flex: 0.5, marginLeft: 15, justifyContent: 'flex-start'}}>
               <Image
                 source={totalComplaintsIcon}
-                style={{width: 100, height: 100}}></Image>
+                style={{width: 80, height: 80}}></Image>
             </View>
             <View style={{marginLeft: 70}}>
               <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
@@ -145,7 +153,7 @@ class HomeScreen extends Component {
             <View>
               <Image
                 source={resolvedComplaintsIcon}
-                style={{width: 100, height: 100}}></Image>
+                style={{width: 80, height:80}}></Image>
             </View>
             <View style={{marginLeft: 15}}>
               <Text style={{fontSize: 56, color: 'white', fontWeight: 'bold'}}>
@@ -268,6 +276,173 @@ class HomeScreen extends Component {
           </Card>
           
         </View>
+  
+      </View>
+    );
+  }
+}
+
+class Custom_Side_Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showAlert: false };
+  }
+ 
+  _logoutUser = async () => {
+    
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
+  render() {
+    
+   const showSimpleAlert = () => {
+      this.props.navigation.dispatch(DrawerActions.closeDrawer());
+      Alert.alert(
+        'Notification',
+        'This Option will be added soon',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {text: 'OK'},
+        ],
+        {cancelable: false},
+      );
+    };
+    const showLogoutAlert = () => {
+      this.props.navigation.dispatch(DrawerActions.closeDrawer());
+      Alert.alert(
+        'logout?',
+        'Are you Sure You Want to Logout?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: () => {this._logoutUser()},
+          },
+        ],
+        {cancelable: false},
+      );
+    };
+ 
+    return (
+ 
+      <View style={styles.sideMenuContainer}>
+
+
+          {/* <View style={{marginLeft:15}}>
+          <Icon style={{ color: '#000000' }} size={25} name={'md-arrow-back'} onPress={()=>{this.props.navigation.dispatch(DrawerActions.closeDrawer())}}/>
+          </View> */}
+ 
+        <Image source={profileIcon}
+          style={{
+            
+            width: 170,
+            height: 170,
+              marginLeft:30
+          }} />
+        <View style={{ justifyContent:'center', alignContent:'center', marginLeft:95, marginTop:10}}>
+        <Text style={{fontWeight:'bold', fontSize:16}}>UserName</Text>
+        </View>
+        
+ 
+        <View style={{ width: '100%', height: 1, backgroundColor: '#e2e2e2', marginTop: 15}} />
+ 
+        <View style={{width: '100%'}}>
+ 
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}} >
+ 
+              <View
+              style={styles.sideMenuIcon}>
+              <Icon name="dashboard" color="#2E8B57"/>
+              </View>
+              
+              <Text style={styles.menuText} onPress={() => this.props.navigation.navigate('First')} > Dashboard </Text>
+ 
+            </View>
+ 
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+ 
+              <View
+              style={styles.sideMenuIcon}>
+              <Icon name="edit" color="#2E8B57"/>
+              </View>
+ 
+              <Text style={styles.menuText} onPress={() => this.props.navigation.navigate('complaintsType')} > Launch Complaint </Text>
+ 
+            </View>
+ 
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+ 
+              <View
+              style={styles.sideMenuIcon} >
+              <Icon name = "error" color="#2E8B57"/>
+              </View>
+ 
+              <Text style={styles.menuText} onPress={() => this.props.navigation.navigate('TotalComplaintsList')} > Complaints </Text>
+ 
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+ 
+              <View
+              style={styles.sideMenuIcon} >
+              <Icon name = "email" color="#2E8B57"/>
+              </View>
+ 
+              <Text style={styles.menuText} onPress={() => showSimpleAlert()} > Inbox </Text>
+ 
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+ 
+              <View
+              style={styles.sideMenuIcon} >
+              <Icon name = "account-box" color="#2E8B57"/>
+              </View>
+ 
+              <Text style={styles.menuText} onPress={() => showSimpleAlert()} > Accounts </Text>
+ 
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+ 
+              <View
+              style={styles.sideMenuIcon} >
+              <Icon name = "assignment-turned-in" color="#2E8B57"/>
+              </View>
+ 
+              <Text style={styles.menuText} onPress={() => showSimpleAlert()} > Package Plan </Text>
+ 
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+ 
+              <View
+              style={styles.sideMenuIcon} >
+              <Icon name = "cloud-download" color="#2E8B57"/>
+              </View>
+ 
+              <Text style={styles.menuText} onPress={() => showSimpleAlert()} > Updates </Text>
+ 
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
+ 
+              <View
+              style={styles.sideMenuIcon} >
+              <Icon name = "exit-to-app" color="#2E8B57"/>
+              </View>
+ 
+              <Text style={styles.menuText} onPress={() => showLogoutAlert()} > Logout </Text>
+ 
+            </View>
+ 
+ 
+       </View>
+ 
+       <View style={{ width: '100%', height: 1, backgroundColor: '#e2e2e2', marginTop: 15}} />
+ 
+       
       </View>
     );
   }
@@ -283,7 +458,7 @@ const FirstActivity_StackNavigator = createStackNavigator({
       headerLeft: () => <MenuIcon navigationProps={navigation} />,
      
       headerStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
       },
       headerTintColor: '#fff',
     }),
@@ -339,7 +514,7 @@ const DrawerNavigatorExample = createDrawerNavigator(
   },
   {
     //For the Custom sidebar menu we have to provide our CustomSidebarMenu
-    contentComponent: CustomSidebarMenu,
+    contentComponent: Custom_Side_Menu,
     //Sidebar width
     drawerWidth: Dimensions.get('window').width - 100,
   },
@@ -364,7 +539,7 @@ const styles = StyleSheet.create({
   cardButton: {
     width: '90%',
     height: 50,
-    backgroundColor: '#6ECF68',
+    backgroundColor: '#2E8B57',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'black',
@@ -375,6 +550,30 @@ const styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
+  sideMenuContainer: {
+ 
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#fff',
+    
+    paddingTop: 20
+  },
+  sideMenuIcon:
+  {
+    resizeMode: 'center',
+    width: 28, 
+    height: 28, 
+    marginRight: 10,
+    marginLeft: 20
+    
+  },
+ 
+  menuText:{
+ 
+    fontSize: 15,
+    color: '#222222',
+    
+  }
 });
 
 const AppNavigator = createStackNavigator({
@@ -384,6 +583,7 @@ const AppNavigator = createStackNavigator({
       headerShown: false,
     },
   },
+
   complaintsType: {
     screen: complaintsTypeScreen,
     navigationOptions: {
@@ -408,7 +608,7 @@ const AppNavigator = createStackNavigator({
     navigationOptions : {
       title: 'Close Complaint',
       headerStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2E8B57',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {

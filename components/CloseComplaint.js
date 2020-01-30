@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
       cardButton: {
         width: '90%',
         height: 50,
-        backgroundColor: '#6ECF68',
+        backgroundColor: '#2E8B57',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'black',
