@@ -29,7 +29,7 @@ export default class CreateComplaintScreen extends Component {
   constructor() {
     super();
     this.State = {
-      dataSource: [],
+      dataSource: {},
       status: 'cancel',
       filepath: {
         data: '',
@@ -151,30 +151,15 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
   componentDidMount() {
     const {navigation} = this.props;
     const natureId = navigation.getParam('natureId', 'NO-User');
-    fetch('http://bsmartcms.com/cp/api/nature-types/' + natureId).then(response => response.json()).then(responseData => {
+ let responseJson =   fetch('http://bsmartcms.com/cp/api/nature-types/' + natureId).then(response => response.json()).then(responseData => {
 
-
+      console.log(responseData);
       this.setState({  dataSource: responseData  })
-      console.log(this.state.dataSource)
+  
 
     })
+          
 
-  //  axios.get('http://bsmartcms.com/cp/api/nature-types/' + natureId) .then(function (response) {
-  //   let data =response.data;
-    
-  
-  //   this.setState({
-
-
-  //     dataSource: data
-  //   })
-  //   console.log(dataSource)
-  
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
-    
   }
   
 
@@ -196,6 +181,8 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
   
     const {navigation} = this.props;
     const natureName = navigation.getParam('natureName', 'NO-User');
+    const dataSource = this.state;
+  
     return (
       <View style={styles.mainContainer}>
         <ScrollView>
@@ -260,7 +247,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               <Picker.Item label="Not Defined" value="Not Defined" />
               <Picker.Item label="Resolved" value="resolved" />
             </Picker>
-            {/* {console.log(this.state.dataSource)} */}
+            {console.log(dataSource)}
           </View>
           <View
             style={{
@@ -371,7 +358,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               <TouchableHighlight
                 style={{width: '100%', alignItems: 'center'}}
                 underlayColor="#2094D0"
-                onPress={this.props.navigation.navigate('')}>
+                >
                 <View style={{flexDirection: 'row'}}>
                   <Image
                     source={launchComplainIcon}
