@@ -26,8 +26,8 @@ const options = {
 };
 
 export default class CreateComplaintScreen extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.State = {
       dataSource: [],
       status: 'cancel',
@@ -39,6 +39,7 @@ export default class CreateComplaintScreen extends Component {
       fileUri: '',
   
     };
+    
   }
 
   chooseImage = () => {
@@ -150,21 +151,10 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
   componentDidMount() {
     const {navigation} = this.props;
     const natureId = navigation.getParam('natureId', 'NO-User');
-   
-
-  {
-     alert(natureId)
-    }
-
-    
     fetch('http://bsmartcms.com/cp/api/nature-types/' + natureId).then(response => response.json()).then(responseData => {
 
 
-      this.setState({
-
-
-        dataSource: responseData
-      })
+      this.setState({  dataSource: responseData  })
       console.log(this.state.dataSource)
 
     })
@@ -186,9 +176,10 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
   // });
     
   }
+  
 
-
-  renderFileUri() {
+  renderFileUri() 
+  {
     if (this.state.fileUri) {
       return <Image
         source={{ uri: this.state.fileUri }}
@@ -203,22 +194,12 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
   }
   render() {
   
-  
+    const {navigation} = this.props;
+    const natureName = navigation.getParam('natureName', 'NO-User');
     return (
       <View style={styles.mainContainer}>
         <ScrollView>
-          <View
-            style={{
-              flexDirection: 'row',
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 10,
-            }}>
-            <Text style={{fontSize: 26, color: 'gray', fontWeight: 'bold'}}>
-     
-            </Text>
-          </View>
+      
 
           <View style={{flexDirection: 'row', justifyContent:'center' , alignItems:'center'}}>
             <Text
@@ -230,25 +211,23 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
                 padding: 5,
                 fontWeight: 'bold',
                 marginTop: 25,
-                marginLeft: 30,
+                marginLeft: 45,
               }}>
               Nature:
             </Text>
-            <Picker
-              style={{marginLeft: 10, width: 200, marginTop: 20}}
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({status: itemValue})
+            <Text
+              style={{
+                fontSize: 16,
+                alignItems: 'center',
+                color: '#57595d',
+                width: 200,
                 
-              }>
- {this.state.dataSource !== [] ? (
-        this.state.dataSource.map(dataSource => {
-            return <Picker.Item label={dataSource.name} value={dataSource.id} />;
-        })
-    ) : (
-        <Picker.Item label="Loading..." value="0" />
-    )}
-          
-            </Picker>
+                fontWeight: 'bold',
+                marginTop: 25,
+                marginLeft: 25,
+              }}>
+              {natureName}
+            </Text>
           </View>
           <View
             style={{
@@ -281,6 +260,7 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
               <Picker.Item label="Not Defined" value="Not Defined" />
               <Picker.Item label="Resolved" value="resolved" />
             </Picker>
+            {/* {console.log(this.state.dataSource)} */}
           </View>
           <View
             style={{

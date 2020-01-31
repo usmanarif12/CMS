@@ -117,8 +117,7 @@ class Login extends Component {
     }
   }
   render() {
-    const isSplashViewed = AsyncStorage.getItem('SplashViewed');
-    if (this.state.isLoading && isSplashViewed !== '1') {
+    if (this.state.isLoading) {
       return <SplashScreen />;
     }
 
@@ -391,11 +390,9 @@ const RootStack = createStackNavigator({
 const AuthStack = createStackNavigator({
   Login: {
     screen: Login,
-
     navigationOptions: {
       headerShown: false,
     },
-
   },
   ForgetPassword: {
     screen: ForgetPasswordScreen,

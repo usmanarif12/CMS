@@ -61,7 +61,7 @@ class ComplaintTypes extends Component {
 
 
     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
-      <TouchableHighlight onPress={() => this.props.navigation.navigate('createComplaint', {natureId : item.id})} >
+      <TouchableHighlight onPress={() => this.props.navigation.navigate('createComplaint', {natureId : item.id , natureName: item.name})} >
 
         <Card style={{ height: 180, width: 180, marginRight: 20 }}>
 
@@ -83,7 +83,7 @@ class ComplaintTypes extends Component {
 
 
 
-      <ScrollView>
+    
         <View style={styles.Container}>
           <StatusBar
             backgroundColor="#2E8B57"
@@ -106,7 +106,7 @@ class ComplaintTypes extends Component {
 
 
         </View>
-      </ScrollView>
+      
     );
   }
 }
