@@ -37,7 +37,8 @@ class ComplaintTypes extends Component {
     super();
     this.state = {
 
-      dataSource: []
+      dataSource: [],
+      isLoading:true
     }
 
   }
@@ -51,7 +52,8 @@ class ComplaintTypes extends Component {
       this.setState({
 
 
-        dataSource: responseData
+        dataSource: responseData,
+        isLoading:false
       })
 
     })
@@ -63,7 +65,7 @@ class ComplaintTypes extends Component {
     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
       <TouchableHighlight onPress={() => this.props.navigation.navigate('createComplaint', {natureId : item.id , natureName: item.name})} >
 
-        <Card style={{ height: 180, width: 180, marginRight: 20 }}>
+        <Card style={{ height: 150, width: 150 }}>
 
           <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <Image style={{ height: 120, width: 120 }} source={{uri:item.image}}></Image>
@@ -78,9 +80,18 @@ class ComplaintTypes extends Component {
 
   );
   render() {
-    
-    return (
+    if (this.state.isLoading) {
+      return (
+        <View>
+          <ActivityIndicator size="large"></ActivityIndicator>
+        </View>
+        
+      );
+    }
+    else {
+      return (
 
+      
 
 
     
@@ -108,6 +119,8 @@ class ComplaintTypes extends Component {
         </View>
       
     );
+    }
+  
   }
 }
 
