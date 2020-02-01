@@ -47,6 +47,7 @@ class Login extends Component {
       isLoading: true,
       TextInput_Email: '',
       TextInput_Password: '',
+      userId:''
     };
   }
   Validate = async() => {
@@ -90,6 +91,8 @@ class Login extends Component {
     if (responseJson.message === "true") {
       DialogProgress.hide();
       await AsyncStorage.setItem('isLoggedIn', '1');
+      await AsyncStorage.setItem('userId', responseJson.data.uid);
+      console.log(responseJson.data.uid);
       this.props.navigation.navigate('Home');
     }
     else {

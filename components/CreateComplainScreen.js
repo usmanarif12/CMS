@@ -8,7 +8,8 @@ import {
   Image,
   TouchableOpacity,
   TouchableHighlight,
-  ActivityIndicator
+  ActivityIndicator,
+  AsyncStorage
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Card} from 'react-native-shadow-cards';
@@ -37,7 +38,14 @@ export default class CreateComplaintScreen extends Component {
 
    isLoading: true,
    PickerValueHolder : '',
-   status: 'cancel',
+     status: 'cancel',
+     natureId: '',
+     userId:'',
+     natureTypeId: '',
+     poc: '',
+     title: '',
+     description: '',
+    
    filepath: {
      data: '',
      uri: '',
@@ -155,28 +163,33 @@ return <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.fileData }}
 }
 renderFileUri() {
   if (this.state.fileUri) {
-    return <Image
+    return ( <Image
       source={{ uri: this.state.fileUri }}
       style={styles.images}
-    />
+    />)
   } else {
-    return <Image
+    return (<Image
       source={require('../assets/icons/dummy.png')}
       style={styles.images}
-    />
+    />)
   }
 }
 
- componentDidMount() {
+  async componentDidMount() {
   const {navigation} = this.props;
   const natureId = navigation.getParam('natureId', 'NO-User');
+  const userId = await AsyncStorage.getItem('userId');
+    this.setState({
+      userId: userId,
+    natureId:natureId})
    
       return fetch('http://bsmartcms.com/cp/api/nature-types/'  + natureId)
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
             isLoading: false,
-            dataSource: responseJson
+            dataSource: responseJson,
+            natureId:natureId
           }, function() {
             // In this block you can do something with new state.
           });
@@ -190,10 +203,22 @@ renderFileUri() {
 
       Alert.alert(this.state.PickerValueHolder);
 
-    }
+  }
+  createComplaint = () => {
+    console.log( 'customerID=',this.state.userId);
+    console.log('natureType Id=', this.state.PickerValueHolder);
+    console.log('Nature Id=', this.state.natureId);
+    console.log('title=', this.state.title);
+    console.log('description=', this.state.description);
+    console.log('poc=', this.state.poc);
+    console.log('image=', this.state.fileUri);
+  
+  }
 
- render() {
-
+  render() {
+    const {navigation} = this.props;
+    const natureName = navigation.getParam('natureName', 'NO-User');
+   
    if (this.state.isLoading) {
      return (
        <View style={{flex: 1, paddingTop: 20}}>
@@ -201,7 +226,7 @@ renderFileUri() {
        </View>
      );
    }
-
+  
    return (
 
     <View style={styles.mainContainer}>
@@ -219,7 +244,7 @@ renderFileUri() {
         </Text>
       </View>
 
-      <View style={{flexDirection: 'row', justifyContent:'center' , alignItems:'center'}}>
+      <View style={{flexDirection: 'row', }}>
         <Text
           style={{
             fontSize: 16,
@@ -228,21 +253,24 @@ renderFileUri() {
             width: 100,
             padding: 5,
             fontWeight: 'bold',
-            marginTop: 25,
-            marginLeft: 30,
+            marginTop: 5,
+            marginLeft: 45
           }}>
           Nature:
         </Text>
-        <Picker style={{marginLeft: 10, width: 200, marginTop: 15}}
-            selectedValue={this.state.PickerValueHolder}
-
-            onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
-
-            { this.state.dataSource.map((item, key)=>(
-            <Picker.Item label={item.name} value={item.name} key={key} />)
-            )}
-    
-          </Picker>
+        <Text
+          style={{
+            fontSize: 16,
+            alignItems: 'center',
+            color: '#57595d',
+            width: 100,
+            padding: 5,
+            fontWeight: 'bold',
+            marginTop: 5,
+            marginLeft: 30,
+          }}>
+          {natureName}
+        </Text>
 
       </View>
       <View
@@ -268,14 +296,16 @@ renderFileUri() {
           }}>
           Nature Type:
         </Text>
-        <Picker
-          style={{marginLeft: 10, width: 200, marginTop: 15}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({status: itemValue})
-          }>
-          <Picker.Item label="Not Defined" value="Not Defined" />
-          <Picker.Item label="Resolved" value="resolved" />
-        </Picker>
+        <Picker style={{marginLeft: 10, width: 200, marginTop: 15}}
+            selectedValue={this.state.PickerValueHolder}
+
+            onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
+              <Picker.item label='Select Type' value=''/>
+            { this.state.dataSource.map((item, key)=>(
+            <Picker.Item label={item.name} value={item.id} key={key} />)
+            )}
+    
+          </Picker>
       </View>
       <View
         style={{
@@ -284,7 +314,28 @@ renderFileUri() {
           backgroundColor: '#e2e2e2',
           marginTop: 5,
         }}
-      />
+         />
+             <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
+        <Text
+          style={{
+            fontSize: 16,
+            alignItems: 'center',
+            color: '#57595d',
+            width: 70,
+            padding: 5,
+            fontWeight: 'bold',
+            marginTop: 20,
+            marginLeft: 35,
+          }}>
+          POC
+        </Text>
+        <Card style={{marginTop: 20, width: 240, height: 40}}>
+             <TextInput style={{ fontSize: 14, paddingLeft: 10 }} placeholder="Point of Contact"
+             onChangeText={TextInputValue =>
+              this.setState({poc: TextInputValue})
+            }></TextInput>
+        </Card>
+      </View>
       <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
         <Text
           style={{
@@ -300,7 +351,10 @@ renderFileUri() {
           Title:
         </Text>
         <Card style={{marginTop: 20, width: 240, height: 40}}>
-          <TextInput style={{fontSize: 14,paddingLeft:10}} placeholder="Title Of Complaint"></TextInput>
+             <TextInput style={{ fontSize: 14, paddingLeft: 10 }} placeholder="Title Of Complaint"
+             onChangeText={TextInputValue =>
+              this.setState({title: TextInputValue})
+            }></TextInput>
         </Card>
       </View>
       <View
@@ -331,7 +385,10 @@ renderFileUri() {
             placeholder="Description Of Complaint"
             multiline={true}
             numberOfLines={6}
-            style={{fontSize: 14, paddingLeft:10}}></TextInput>
+               style={{ fontSize: 14, paddingLeft: 10 }}
+               onChangeText={TextInputValue =>
+                this.setState({description: TextInputValue})
+              }></TextInput>
         </Card>
       </View>
       <View
@@ -362,7 +419,8 @@ renderFileUri() {
         </Card>
           </View>
         </View>
-        <Image source={dummy} style= {styles.images}></Image>
+           {/* <Image source={dummy} style= {styles.images}></Image> */}
+           {this.renderFileUri()}
       </View>
       <View
         style={{
@@ -386,7 +444,7 @@ renderFileUri() {
           <TouchableHighlight
             style={{width: '100%', alignItems: 'center'}}
             underlayColor="#2094D0"
-            onPress={this.props.navigation.navigate('')}>
+            onPress={ () => this.createComplaint()}>
             <View style={{flexDirection: 'row'}}>
               <Image
                 source={launchComplainIcon}
