@@ -281,7 +281,7 @@ renderFileUri() {
     console.log('title=', this.state.title);
     console.log('description=', this.state.description);
     console.log('poc=', this.state.poc);
-    console.log('image=', this.state.fileUri + this.state.fileData);
+    console.log('image=', this.state.fileUri);
 
 
     fetch(
@@ -300,7 +300,7 @@ renderFileUri() {
           title:  this.state.title,
           poc:  this.state.poc,
           description:  this.state.description,
-          image: this.state.fileUri + this.state.fileData
+          image: 'https://www.testimg.com/test.jpg'
           
         }),
       },
@@ -417,7 +417,7 @@ renderFileUri() {
             onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
               <Picker.item label='Select Type' value=''/>
 
-
+              
             { this.state.dataSource.map((item, key)=>(
             <Picker.Item label={item.name} value={item.id} key={key} />)
             )}
