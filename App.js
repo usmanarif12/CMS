@@ -90,10 +90,20 @@ class Login extends Component {
        
     if (responseJson.message === "true") {
       DialogProgress.hide();
-      await AsyncStorage.setItem('isLoggedIn', '1');
-      await AsyncStorage.setItem('userId', responseJson.data.uid);
-      console.log(responseJson.data.uid);
-      this.props.navigation.navigate('Home');
+      try {
+
+        await AsyncStorage.setItem('isLoggedIn', '1');
+        await AsyncStorage.setItem('userId', responseJson.data.id.toString());
+        console.log(responseJson.data.id);
+        this.props.navigation.navigate('Home');
+      }
+      catch ( error)
+      {
+alert (error)
+
+      }
+    
+   
     }
     else {
       DialogProgress.hide();

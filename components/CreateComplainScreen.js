@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   ActivityIndicator,
-  AsyncStorage
+  AsyncStorage,
+  Alert
 } from 'react-native';
+import { Dropbox } from 'dropbox';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Card} from 'react-native-shadow-cards';
 import launchComplainIcon from '../assets/icons/pencil-48.png';
@@ -91,6 +93,8 @@ export default class CreateComplaintScreen extends Component {
     }
   });
 };
+
+
 launchCamera = () => {
   let options = {
     storageOptions: {
@@ -98,6 +102,8 @@ launchCamera = () => {
       path: 'images',
     },
   };
+
+ 
   ImagePicker.launchCamera(options, response => {
     console.log('Response = ', response);
 
@@ -174,11 +180,42 @@ renderFileUri() {
     />)
   }
 }
+// uploadImage () {
+
+//   const accessToken = 'bJoFnHX6gFAAAAAAAACb3LbF1-M2uN1GaYX71qshFk613O7f0widyKnut9yzonPM';
+
+//   const dbx = new Dropbox({  
+//     accessToken,  
+    
+//   });
+
+ 
+// }
+// fetchMethod () {
+
+// fetch('https://content.dropboxapi.com/2/files/upload' , {
+//     method: "POST",
+//     body: this.state.fileUri
+//   })
+//     .then(response => response.json())
+//     .then(response => {
+//       console.log("upload succes", response);
+  
+//       this.setState({ fileUri: null });
+//     })
+//     .catch(error => {
+//       console.log("upload error", error);
+//       alert("Upload failed!");
+//     });
+
+//}
+
 
   async componentDidMount() {
   const {navigation} = this.props;
   const natureId = navigation.getParam('natureId', 'NO-User');
   const userId = await AsyncStorage.getItem('userId');
+  console.log(userId)
     this.setState({
       userId: userId,
     natureId:natureId})
@@ -204,14 +241,92 @@ renderFileUri() {
       Alert.alert(this.state.PickerValueHolder);
 
   }
+
+  Validate = async() => {
+
+    const {natureId,userId,natureTypeId,title,description,poc} = this.state;
+
+    if (natureId == '') {
+      alert('Select nature ');
+
+      return false;
+    } else if (title== '') {
+      alert('Please enter the Title');
+
+      return false;
+    }
+
+    else if (description == '') {
+      alert('Please enter Description');
+
+      return false;
+    }
+
+    else if (poc == '') {
+      alert('Please enter Point of Contact');
+
+      return false;
+    }
+ else {
+      this.createComplaint();
+    }
+  };
+
+
   createComplaint = () => {
+
     console.log( 'customerID=',this.state.userId);
     console.log('natureType Id=', this.state.PickerValueHolder);
     console.log('Nature Id=', this.state.natureId);
     console.log('title=', this.state.title);
     console.log('description=', this.state.description);
     console.log('poc=', this.state.poc);
-    console.log('image=', this.state.fileUri);
+    console.log('image=', this.state.fileUri + this.state.fileData);
+
+
+    fetch(
+      'http://bsmartcms.com/cp/api/create_complain',
+      {
+        method: 'POST',
+
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customer:  this.state.userId,
+          nature: this.state.natureId,
+          nature_type:  this.state.PickerValueHolder,
+          title:  this.state.title,
+          poc:  this.state.poc,
+          description:  this.state.description,
+          image: this.state.fileUri + this.state.fileData
+          
+        }),
+      },
+    )
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson)
+
+        if (responseJson.status == "true")
+        {
+          Alert.alert ('Complaint created Successfully')
+
+          this.setState ({
+
+
+
+          })
+
+        }
+        
+     
+      })
+      .catch(error => {
+        
+        Alert.alert(JSON.stringify(error));
+      });
   
   }
 
@@ -301,6 +416,8 @@ renderFileUri() {
 
             onValueChange={(itemValue, itemIndex) => this.setState({PickerValueHolder: itemValue})} >
               <Picker.item label='Select Type' value=''/>
+
+
             { this.state.dataSource.map((item, key)=>(
             <Picker.Item label={item.name} value={item.id} key={key} />)
             )}
@@ -444,7 +561,7 @@ renderFileUri() {
           <TouchableHighlight
             style={{width: '100%', alignItems: 'center'}}
             underlayColor="#2094D0"
-            onPress={ () => this.createComplaint()}>
+            onPress={ () => this.Validate()}>
             <View style={{flexDirection: 'row'}}>
               <Image
                 source={launchComplainIcon}
