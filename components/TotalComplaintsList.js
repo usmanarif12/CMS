@@ -18,6 +18,7 @@ import { createAppContainer } from 'react-navigation';
 import ViewComplaintsScreen from '../components/ViewComplaints.js';
 import { } from 'react-native-gesture-handler';
 import { Card } from 'react-native-shadow-cards';
+import axios from 'axios'
 
 class TotalComplaintsList extends Component {
   constructor(props) {
@@ -34,20 +35,23 @@ dataSource:[],
 
   async componentDidMount() {
     const userId = await AsyncStorage.getItem('userId');
-    return fetch('http://bsmartcms.com/cp/api/user-complains/' + userId)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({
-        isLoading: false,
-        dataSource: responseJson.data,
-        
-      }, function() {
-        console.log(this.state.dataSource)
-      });
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+    axios.get('http://bsmartcms.com/cp/api/user-complains/' + userId)
+    .then(json => json.data.complains.map(mydata =>(
+            
+      {
+        id: mydata.id, 
+        nature_id:mydata.nature_id,
+        status:mydata.status,
+        launch_date:mydata.launch_date,
+        title:mydata.title,
+        description:mydata.description
+     
+      
+  }
+)))
+.then(newData => this.setState({dataSource: newData, isLoading:false}))
+.catch(error => alert(error))
 
 
 
@@ -120,7 +124,7 @@ dataSource:[],
 
       <TouchableHighlight
         onPress={() =>
-          this.props.navigation.navigate('ViewComplaintsScreen')
+          this.props.navigation.navigate('ViewComplaintsScreen' , {complaintId: item.id})
         }>
         <View style={{
           backgroundColor: '#fff',
@@ -132,7 +136,7 @@ dataSource:[],
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Text
               style={{ fontSize: 28, fontWeight: 'bold', color: '#57595d' }}>
-              {item.id}
+              {'#' + item.id}
             </Text>
           </View>
           <View
