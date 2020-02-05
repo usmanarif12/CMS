@@ -146,7 +146,7 @@ dataSource:[],
               backgroundColor: '#e2e2e2',
               marginLeft: 15,
             }}></View>
-          <View style={{ marginLeft: 25 }}>
+          <View style={{ marginLeft: 15}}>
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.description}>
               {item.description}

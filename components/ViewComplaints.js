@@ -21,7 +21,10 @@ class ViewComplaints extends Component {
     super(props);
     this.state = {
 
-      dataSource: [],
+     natureData: [],
+     natureTypeData:[],
+     userData:[],
+     complainData:[],
       isLoading: true,
     };
   }
@@ -31,84 +34,92 @@ class ViewComplaints extends Component {
     const complaintId = navigation.getParam('complaintId', '0');
 
     axios.get('http://bsmartcms.com/cp/api/complain/' + complaintId)
-      .then(json => json.data.complains.map(mydata => (
-
-        {
-          id: mydata.id,
-          launch_date: mydata.launch_date,
-          title: mydata.title,
-          description: mydata.description,
-          supervisor: mydata.supervisor_id,
-          completionDate: mydata.completion_date,
-          assignedTo: mydata.skillman_id
-
-        }
-      )))
-      .then(newData => this.setState({ dataSource: newData, isLoading: false }))
-      .catch(error => alert(error))
+    .then(responseData => {
+     {{console.log(responseData.data.complain)}}
+      this.setState({
+        natureData: responseData.data.complain.nature,
+        natureTypeData:responseData.data.complain.nature_type,
+        userData:responseData.data.complain.user,
+        complainData:responseData.data.complain,
+        isLoading: false,
+      });
+      {console.log(this.state.natureData , this.state.natureTypeData , this.state.userData,this.state.complainData)}
+    }).catch(error => alert(error))
 
 
 
   }
 
-  renderItem = ({item}) => (
-
-    <View style={{ flexDirection: 'row' }}>
-
-    <View style={{ flexDirection: 'column', margin: 20 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: '#57595d' }}>Date</Text>
-      <Text style={{ fontSize: 16, marginBottom: 5, color: '#57595d' }}>27/01/2020</Text>
-      <Card backgroundColor="#2E8B57" style={{ width: 70, height: 40 }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('CloseComplaint')}>
-            <Text style={{ color: 'white' }}>Close</Text>
-          </TouchableOpacity>
-        </View>
-
-      </Card>
-    </View>
-    <View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2', marginLeft: 5 }} />
-
-    <View style={{ flexDirection: 'column', marginLeft: 10, marginTop: 20 }}>
-      <View style={{ flexDirection: 'row' }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Title: </Text>
-  <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d' }}>{item.title}</Text>
-        <View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2', marginLeft: 50 }} />
-
-        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#57595d' }}>ID: </Text>
-  <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 10, color: '#57595d' }}>{item.id}</Text>
-      </View>
-      <View style={{ width: '100%', height: 1, backgroundColor: '#e2e2e2', }} />
-      <View style={{ flexDirection: 'row', marginTop: 20 }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Description: </Text>
-  <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d' }}>{item.description}</Text>
-
-      </View>
-
-
-    </View>
-
-
-  </View>
-  );
+ 
   //Screen1 Component
   render() {
-
+    
 
     return (
       <KeyboardAwareScrollView>
         <View style={styles.MainContainer}>
           <View style={styles.topContainer}>
+          <View style={{ flexDirection: 'row' }}>
 
-          <FlatList
-            data={this.state.dataSource}
-            renderItem={this.renderItem}
-            horizontal={false}
-            numColumns={2}
-            keyExtractor={(item, index) => index}
-          />
+<View style={{ flexDirection: 'column', margin: 20 }}>
+  <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: '#57595d' }}>Date</Text>
+    <Text style={{ fontSize: 16, marginBottom: 5, color: '#57595d' }}>{this.state.complainData.created_at}</Text>
+  <Card backgroundColor="#2E8B57" style={{ width: 70, height: 40 }}>
+    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('CloseComplaint')}>
+        <Text style={{ color: 'white' }}>Close</Text>
+      </TouchableOpacity>
+    </View>
 
-            <View style={{ flexDirection: 'column', flex: 5 }}>
+  </Card>
+</View>
+<View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2', marginLeft: 5 }} />
+
+<View style={{ flexDirection: 'column', marginLeft: 10, marginTop: 20 }}>
+  <View style={{ flexDirection: 'row' }}>
+    <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Title: </Text>
+    <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d' }}>{this.state.complainData.title}</Text>
+    <View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2', marginLeft: 50 }} />
+
+    <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#57595d' }}>ID: </Text>
+    <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 10, color: '#57595d' }}>{'#' , this.state.complainData.id}</Text>
+  </View>
+  <View style={{ width: '100%', height: 1, backgroundColor: '#e2e2e2', }} />
+  <View style={{ flexDirection: 'row', marginTop: 20 }}>
+    <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Description: </Text>
+    <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d' }}>{this.state.complainData.description}</Text>
+
+  </View>
+
+
+</View>
+
+
+</View>
+
+<View syle={{ flexDirection: 'column' }}>	
+            <View style={{flexDirection:'row', marginLeft:15 }}>	
+              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Nature:</Text>	
+    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.natureData.name}</Text>	
+            </View>	
+            <View style={{flexDirection:'row', marginLeft:15 }}>	
+              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Nature type</Text>	
+    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.natureTypeData.name}</Text>	
+            </View>	
+            <View style={{flexDirection:'row', marginLeft:15 }}>	
+              <Text style={{ fontSize: 16, fontWeight: 'bold' ,color:'#57595d'}}>Problem Category</Text>	
+    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.complainData.launch_date}</Text>	
+            </View>	
+            <View style={{flexDirection:'row', marginLeft:15 }}>	
+              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Estimated Completion:</Text>	
+    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.complainData.completion_date}</Text>	
+            </View>	
+            <View style={{flexDirection:'row', marginLeft:15 }}>	
+              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Status</Text>	
+    <Text style={{ fontSize: 16, marginLeft:10,color:'#57595d' }}>{this.state.natureTypeData.stat}</Text>	
+            </View>	
+            <View style={{ width: '100%', height: 2, marginTop:5,backgroundColor: '#e2e2e2' }} />     
+<View style={{ flexDirection: 'column', flex: 5 }}>
               <View style={{ width: '100%', flex: 1, backgroundColor: '#2E8B57', height: 40, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>Chat Head</Text>
               </View>
@@ -175,8 +186,10 @@ class ViewComplaints extends Component {
             </View>
 
           </View>
+                     </View>
+                     </View>
 
-        </View>
+     
       </KeyboardAwareScrollView>
 
     );
