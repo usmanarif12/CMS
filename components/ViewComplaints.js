@@ -2,7 +2,7 @@
 //This is an example code for NavigationDrawer//
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, Text, Button, TextInput, TouchableHighlight, TouchableOpacity,FlatList, KeyboardAvoidingView, Image } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, TouchableHighlight, TouchableOpacity,FlatList, KeyboardAvoidingView, Image, ActivityIndicator } from 'react-native';
 import { Card } from 'react-native-shadow-cards';
 import axios from 'axios'
 
@@ -20,7 +20,7 @@ class ViewComplaints extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+       
      natureData: [],
      natureTypeData:[],
      userData:[],
@@ -53,146 +53,153 @@ class ViewComplaints extends Component {
  
   //Screen1 Component
   render() {
-    
-
-    return (
-      <KeyboardAwareScrollView>
-        <View style={styles.MainContainer}>
-          <View style={styles.topContainer}>
-          <View style={{ flexDirection: 'row' }}>
-
-<View style={{ flexDirection: 'column', margin: 20 }}>
-  <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: '#57595d' }}>Date</Text>
-    <Text style={{ fontSize: 16, marginBottom: 5, color: '#57595d' }}>{this.state.complainData.created_at}</Text>
-  <Card backgroundColor="#2E8B57" style={{ width: 70, height: 40 }}>
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('CloseComplaint')}>
-        <Text style={{ color: 'white' }}>Close</Text>
-      </TouchableOpacity>
+    if (this.state.isLoading) {
+      return (
+        <ActivityIndicator size="large"/>
+      )
+    }
+    else {
+      return (
+        <KeyboardAwareScrollView>
+          <View style={styles.MainContainer}>
+            <View style={styles.topContainer}>
+            <View style={{ flexDirection: 'row' }}>
+  
+  <View style={{ flexDirection: 'column', margin: 20 }}>
+    <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: '#57595d' }}>Date</Text>
+      <Text style={{ fontSize: 16, marginBottom: 5, color: '#57595d' , width:80}}>{this.state.complainData.created_at}</Text>
+    <Card backgroundColor="#2E8B57" style={{ width: 70, height: 40 }}>
+      <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('CloseComplaint')}>
+          <Text style={{ color: 'white' }}>Close</Text>
+        </TouchableOpacity>
+      </View>
+  
+    </Card>
+  </View>
+  <View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2'}} />
+  
+  <View style={{ flexDirection: 'column', marginLeft: 10, marginTop: 20 }}>
+    <View style={{ flexDirection: 'row' }}>
+      <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Title: </Text>
+      <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d', width:120 }}>{this.state.complainData.title}</Text>
+      <View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2' }} />
+  
+      <Text style={{ fontSize: 16, fontWeight: 'bold' , marginLeft: 10,color: '#57595d' }}>ID: </Text>
+      <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#57595d' }}>{'#' , this.state.complainData.id}</Text>
     </View>
-
-  </Card>
-</View>
-<View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2', marginLeft: 5 }} />
-
-<View style={{ flexDirection: 'column', marginLeft: 10, marginTop: 20 }}>
-  <View style={{ flexDirection: 'row' }}>
-    <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Title: </Text>
-    <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d' }}>{this.state.complainData.title}</Text>
-    <View style={{ width: 1, height: '100%', backgroundColor: '#e2e2e2', marginLeft: 50 }} />
-
-    <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#57595d' }}>ID: </Text>
-    <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 10, color: '#57595d' }}>{'#' , this.state.complainData.id}</Text>
+    <View style={{ width: '100%', height: 1, backgroundColor: '#e2e2e2', }} />
+    <View style={{ flexDirection: 'row', marginTop: 20 }}>
+      <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Description: </Text>
+      <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d' , width:120}}>{this.state.complainData.description}</Text>
+  
+    </View>
+  
+  
+    <View style={{ width: '100%', height: 1, backgroundColor: '#e2e2e2', }} />
   </View>
-  <View style={{ width: '100%', height: 1, backgroundColor: '#e2e2e2', }} />
-  <View style={{ flexDirection: 'row', marginTop: 20 }}>
-    <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#57595d' }}>Description: </Text>
-    <Text style={{ fontSize: 18, marginLeft: 10, color: '#57595d' }}>{this.state.complainData.description}</Text>
-
+  
   </View>
-
-
-</View>
-
-
-</View>
-
-<View syle={{ flexDirection: 'column' }}>	
-            <View style={{flexDirection:'row', marginLeft:15 }}>	
-              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Nature:</Text>	
-    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.natureData.name}</Text>	
-            </View>	
-            <View style={{flexDirection:'row', marginLeft:15 }}>	
-              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Nature type</Text>	
-    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.natureTypeData.name}</Text>	
-            </View>	
-            <View style={{flexDirection:'row', marginLeft:15 }}>	
-              <Text style={{ fontSize: 16, fontWeight: 'bold' ,color:'#57595d'}}>Problem Category</Text>	
-    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.complainData.launch_date}</Text>	
-            </View>	
-            <View style={{flexDirection:'row', marginLeft:15 }}>	
-              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Estimated Completion:</Text>	
-    <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.complainData.completion_date}</Text>	
-            </View>	
-            <View style={{flexDirection:'row', marginLeft:15 }}>	
-              <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Status</Text>	
-    <Text style={{ fontSize: 16, marginLeft:10,color:'#57595d' }}>{this.state.natureTypeData.stat}</Text>	
-            </View>	
-            <View style={{ width: '100%', height: 2, marginTop:5,backgroundColor: '#e2e2e2' }} />     
-<View style={{ flexDirection: 'column', flex: 5 }}>
-              <View style={{ width: '100%', flex: 1, backgroundColor: '#2E8B57', height: 40, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>Chat Head</Text>
+  
+  <View syle={{ flexDirection: 'column' }}>	
+              <View style={{flexDirection:'row', marginLeft:15 }}>	
+                <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Nature:</Text>	
+      <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.natureData.name}</Text>	
+              </View>	
+              <View style={{flexDirection:'row', marginLeft:15 }}>	
+                <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Nature type</Text>	
+      <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.natureTypeData.name}</Text>	
+              </View>	
+              <View style={{flexDirection:'row', marginLeft:15 }}>	
+                <Text style={{ fontSize: 16, fontWeight: 'bold' ,color:'#57595d'}}>Problem Category</Text>	
+      <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.complainData.launch_date}</Text>	
+              </View>	
+              <View style={{flexDirection:'row', marginLeft:15 }}>	
+                <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Estimated Completion:</Text>	
+      <Text style={{ fontSize: 16, marginLeft:10 ,color:'#57595d'}}>{this.state.complainData.completion_date}</Text>	
+              </View>	
+              <View style={{flexDirection:'row', marginLeft:15 }}>	
+                <Text style={{ fontSize: 16, fontWeight: 'bold',color:'#57595d' }}>Status</Text>	
+      <Text style={{ fontSize: 16, marginLeft:10,color:'#57595d' }}>{this.state.natureTypeData.stat}</Text>	
+              </View>	
+              <View style={{ width: '100%', height: 2, marginTop:5,backgroundColor: '#e2e2e2' }} />     
+  <View style={{ flexDirection: 'column', flex: 5 }}>
+                <View style={{ width: '100%', flex: 1, backgroundColor: '#2E8B57', height: 40, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}>Chat Head</Text>
+                </View>
+                <View style={{ flexDirection: 'column', backgroundColor: '#ECCCAB', flex: 4 }}>
+  
+                  <View style={{ justifyContent: 'flex-start', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
+                    <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
+                    <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
+                  </View>
+                  <View style={{ justifyContent: 'flex-start', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
+                    <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
+                    <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
+                  </View>
+                  <View style={{ justifyContent: 'flex-start', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
+                    <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
+                    <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
+                  </View>
+                  <View style={{ justifyContent: 'flex-end', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
+                    <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
+                    <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
+                  </View>
+                  <View style={{ justifyContent: 'flex-end', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
+                    <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
+                    <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
+                  </View>
+                  <View style={{ justifyContent: 'flex-end', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
+                    <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
+                    <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
+                  </View>
+  
+  
+  
+  
+                  <View style={{ justifyContent: 'flex-end', justifyContent: 'center', marginTop: 10 }}>
+  
+                  </View>
+  
+                </View>
+  
+  
               </View>
-              <View style={{ flexDirection: 'column', backgroundColor: '#ECCCAB', flex: 4 }}>
-
-                <View style={{ justifyContent: 'flex-start', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
-                  <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
-                  <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
+              <View style={{ justifyContent: 'flex-end', alignContent: 'flex-end' }}>
+  
+                <View style={{ flex: 1, }}>
+                  <View style={{ flexDirection: 'row' }}>
+  
+                    <TextInput
+                      placeholder="Write Message Here"
+                      placeholderColor="#c4c3cb"
+                      style={styles.loginFormTextInput}
+                    />
+                    <TouchableHighlight>
+                      <Image style={{ width: 30, height: 30, marginTop: 10 }} source={micIcon}></Image>
+                    </TouchableHighlight>
+                    <TouchableHighlight>
+                      <Image style={{ width: 30, height: 30, marginTop: 10 }} source={sendIcon}></Image>
+                    </TouchableHighlight>
+  
+  
+  
+  
+                  </View>
                 </View>
-                <View style={{ justifyContent: 'flex-start', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
-                  <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
-                  <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
-                </View>
-                <View style={{ justifyContent: 'flex-start', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
-                  <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
-                  <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
-                </View>
-                <View style={{ justifyContent: 'flex-end', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
-                  <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
-                  <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
-                </View>
-                <View style={{ justifyContent: 'flex-end', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
-                  <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
-                  <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
-                </View>
-                <View style={{ justifyContent: 'flex-end', borderRadius: 4, height: 40, justifyContent: 'center', marginTop: 10, marginLeft: 10, width: 200, backgroundColor: 'white' }}>
-                  <Text style={{ marginLeft: 20, fontSize: 16 }}>Hi there..</Text>
-                  <Text style={{ marginLeft: 150, fontSize: 12, color: '#A6ACAF' }}>8:02 PM</Text>
-                </View>
-
-
-
-
-                <View style={{ justifyContent: 'flex-end', justifyContent: 'center', marginTop: 10 }}>
-
-                </View>
-
               </View>
-
-
+  
             </View>
-            <View style={{ justifyContent: 'flex-end', alignContent: 'flex-end' }}>
+                       </View>
+                       </View>
+  
+       
+        </KeyboardAwareScrollView>
+  
+      );
+    }
 
-              <View style={{ flex: 1, }}>
-                <View style={{ flexDirection: 'row' }}>
-
-                  <TextInput
-                    placeholder="Write Message Here"
-                    placeholderColor="#c4c3cb"
-                    style={styles.loginFormTextInput}
-                  />
-                  <TouchableHighlight>
-                    <Image style={{ width: 30, height: 30, marginTop: 10 }} source={micIcon}></Image>
-                  </TouchableHighlight>
-                  <TouchableHighlight>
-                    <Image style={{ width: 30, height: 30, marginTop: 10 }} source={sendIcon}></Image>
-                  </TouchableHighlight>
-
-
-
-
-                </View>
-              </View>
-            </View>
-
-          </View>
-                     </View>
-                     </View>
-
-     
-      </KeyboardAwareScrollView>
-
-    );
+    
   }
 }
 

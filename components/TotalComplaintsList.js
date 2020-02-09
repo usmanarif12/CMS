@@ -76,7 +76,7 @@ dataSource:[],
             fontSize: 16,
             alignItems: 'center',
             color: '#a9a9a9',
-            width: 100,
+            width: '45%',
             padding: 5,
 
             marginTop: 10,
@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#57595d',
+    width:220
   },
   cardButton: {
     width: '20%',
@@ -216,6 +217,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 19,
     color: '#57595d',
+    width:220
   },
 });
 

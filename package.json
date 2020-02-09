@@ -20,6 +20,7 @@
     "react-native-cards": "^1.1.4",
     "react-native-dialog-progress": "^1.0.2",
     "react-native-elements": "^1.2.7",
+ 
     "react-native-floating-action": "^1.20.0",
     "react-native-gesture-handler": "^1.5.3",
     "react-native-image-picker": "^2.2.0",
